@@ -1,0 +1,73 @@
+﻿head,relation,tail,evidence
+APT32,operates_in,Vietnam,APT32 is a suspected Vietnam-based threat group that has been active since at least 2014
+APT32,targets,government,"The group has targeted multiple private sector industries as well as foreign governments, dissidents, and journalists with a strong focus on Southeast Asian countries like Vietnam, the Philippines, La"
+APT28,attacks,Hillary Clinton campaign,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S"
+APT28,attacks,Democratic National Committee,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S"
+APT28,attacks,Democratic Congressional Campaign Committee,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S"
+Hillary Clinton campaign,involves,APT28,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S"
+Democratic National Committee,involves,APT28,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S"
+Democratic Congressional Campaign Committee,involves,APT28,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S"
+APT28,targets,government,"APT28 has been known to target government, military, and security organizations"
+APT28,targets,military,"APT28 has been known to target government, military, and security organizations"
+APT28,targets,security organizations,"APT28 has been known to target government, military, and security organizations"
+APT28,uses,Mimikatz,APT28 has used credential dumping tools such as Mimikatz
+APT28,exploits_software,Microsoft Office,APT28 has used spearphishing emails with malicious Microsoft Office attachments
+APT28,uses,X-Agent,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS"
+APT28,uses,X-Tunnel,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS"
+APT28,uses,WinIDS,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS"
+APT28,uses,implants,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS"
+APT28,uses,Responder,APT28 has used the Responder tool to capture credentials via LLMNR/NBT-NS poisoning
+APT29,targets,government,"They have operated since at least 2008, often targeting governmental networks in Europe and NATO member countries, research institutes, and think tanks"
+APT29,attacks,Democratic National Committee,APT29 reportedly compromised the Democratic National Committee starting in the summer of 2015
+Democratic National Committee,involves,APT29,APT29 reportedly compromised the Democratic National Committee starting in the summer of 2015
+SolarWinds Compromise,involves,APT29,"In April 2021, the US and UK governments attributed the SolarWinds Compromise to the SVR, which they say was perpetrated by APT29"
+APT29,uses,HAMMERTOSS,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY"
+APT29,uses,CHOPSTICK,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY"
+APT29,uses,POSHSPY,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY"
+APT29,uses,malware,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY"
+APT30,operates_in,Southeast Asia,APT30 has been active since at least 2005 and has primarily targeted organizations in Southeast Asia
+APT30,uses,backdoors,APT30 has used custom backdoors for command and control
+APT38,targets,financial,"Active since at least 2014, APT38 has targeted banks, financial institutions, casinos, and cryptocurrency exchanges worldwide to steal money and cryptocurrency"
+APT38,targets,cryptocurrency,"Active since at least 2014, APT38 has targeted banks, financial institutions, casinos, and cryptocurrency exchanges worldwide to steal money and cryptocurrency"
+Bangladesh Bank heist,involves,APT38,The group has been linked to the 2016 Bangladesh Bank heist
+APT38,uses,malware,APT38 has used custom malware families including NESTEGG and NACHOCHEESE
+APT38,uses,NESTEGG,APT38 has used custom malware families including NESTEGG and NACHOCHEESE
+APT38,uses,NACHOCHEESE,APT38 has used custom malware families including NESTEGG and NACHOCHEESE
+APT39,operates_in,Iranian,APT39 is an Iranian cyber espionage group that has been active since at least 2014
+APT39,targets,telecommunications,"The group has targeted a wide range of industries including telecommunications, travel, technology, and oil and gas sectors"
+APT39,targets,technology,"The group has targeted a wide range of industries including telecommunications, travel, technology, and oil and gas sectors"
+APT39,targets,oil and gas,"The group has targeted a wide range of industries including telecommunications, travel, technology, and oil and gas sectors"
+APT39,targets,telecom,"The group has targeted a wide range of industries including telecommunications, travel, technology, and oil and gas sectors"
+APT39,uses,web shells,APT39 has used web shells for persistence and command execution
+APT39,uses,Mimikatz,APT39 has used tools like Mimikatz to dump credentials from memory.
+APT41,operates_in,Chinese,APT41 is a Chinese state-sponsored espionage group that has been active since at least 2012
+APT41,targets,technology,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries"
+APT41,targets,telecom,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries"
+APT41,targets,healthcare,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries"
+APT41,targets,video game,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries"
+APT41,uses,malware,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX"
+APT41,uses,HIGHNOON,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX"
+APT41,uses,POISONPLUG,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX"
+APT41,uses,HOMEUNIX,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX"
+APT41,uses,web shells,APT41 has used web shells for persistence
+APT41,uses,ransomware,APT41 has deployed ransomware for financial gain.
+BRONZE BUTLER,operates_in,Chinese,BRONZE BUTLER is a cyber espionage group with likely Chinese origins that has been active since at least 2008
+BRONZE BUTLER,targets,government,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors"
+BRONZE BUTLER,targets,technology,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors"
+BRONZE BUTLER,targets,biotechnology,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors"
+BRONZE BUTLER,targets,electronics manufacturing,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors"
+BRONZE BUTLER,targets,industrial chemistry,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors"
+BRONZE BUTLER,uses,malware,BRONZE BUTLER has used custom malware including Daserf and xxmm
+BRONZE BUTLER,uses,Daserf,BRONZE BUTLER has used custom malware including Daserf and xxmm
+BRONZE BUTLER,uses,xxmm,BRONZE BUTLER has used custom malware including Daserf and xxmm
+Kimsuky,operates_in,UK,Kimsuky is a North Korean-based threat group that has been active since at least 2012
+Kimsuky,operates_in,North Korean,Kimsuky is a North Korean-based threat group that has been active since at least 2012
+Kimsuky,uses,malware,Kimsuky has used various custom tools and malware for espionage
+Wizard Spider,operates_in,Russia,Wizard Spider is a Russia-based financially motivated threat group originally known for the creation and deployment of TrickBot since at least 2016
+Wizard Spider,uses,malware,Wizard Spider has used TrickBot malware for initial access and credential theft
+Wizard Spider,uses,TrickBot,Wizard Spider has used TrickBot malware for initial access and credential theft
+Wizard Spider,uses,ransomware,Wizard Spider has deployed Ryuk and Conti ransomware
+Wizard Spider,uses,Ryuk,Wizard Spider has deployed Ryuk and Conti ransomware
+Wizard Spider,uses,Conti,Wizard Spider has deployed Ryuk and Conti ransomware
+Wizard Spider,uses,PowerShell Empire,Wizard Spider has used PowerShell Empire for post-exploitation
+Wizard Spider,uses,Mimikatz,Wizard Spider has used credential dumping tools like Mimikatz
