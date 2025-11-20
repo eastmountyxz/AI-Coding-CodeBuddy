@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全知识图谱可视化</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .controls {
+            background: white;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+        }
+        
+        .graph-container {
+            flex: 1;
+            position: relative;
+            background: white;
+        }
+        
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-left: 1px solid #ddd;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        
+        .legend {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .node-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .relationships {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .relationship-item {
+            background: white;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 3px;
+            border-left: 4px solid #007bff;
+            font-size: 12px;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .node {
+            stroke: #fff;
+            stroke-width: 1.5px;
+            cursor: pointer;
+        }
+        
+        .link {
+            stroke: #999;
+            stroke-opacity: 0.6;
+        }
+        
+        .link-label {
+            font-size: 10px;
+            fill: #666;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .zoom-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 3px;
+            cursor: pointer;
+            margin: 2px;
+            font-size: 16px;
+        }
+        
+        .highlighted {
+            stroke-width: 3px;
+            stroke: #ff6b6b;
+        }
+        
+        .faded {
+            opacity: 0.2;
+        }
+        
+        .highlight-link {
+            stroke: #ff6b6b;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>安全知识图谱可视化</h1>
+        <p>基于威胁情报数据构建的知识图谱</p>
+    </div>
+    
+    <div class="container">
+        <div class="graph-container">
+            <div class="controls">
+                <input type="text" class="search-box" placeholder="搜索节点..." id="searchInput">
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="resetZoom()">重置视图</button>
+                    <button class="btn btn-success" onclick="exportPNG()">导出PNG</button>
+                </div>
+            </div>
+            <div id="graph"></div>
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()">+</button>
+                <button class="zoom-btn" onclick="zoomOut()">-</button>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="legend">
+                <h3>图例</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                    <span>威胁组织 (AG)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #4ecdc4;"></div>
+                    <span>地理位置 (RL)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #45b7d1;"></div>
+                    <span>攻击技术 (AT)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #96ceb4;"></div>
+                    <span>攻击实体 (AE)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #feca57;"></div>
+                    <span>攻击方法 (AM)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff9ff3;"></div>
+                    <span>攻击工具 (AEQ)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #54a0ff;"></div>
+                    <span>系统工具 (SI)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #5f27cd;"></div>
+                    <span>攻击行业 (AI)</span>
+                </div>
+            </div>
+            
+            <div class="node-info">
+                <h3>节点信息</h3>
+                <div id="nodeDetails">点击节点查看详细信息</div>
+            </div>
+            
+            <div class="relationships">
+                <h3>关联关系</h3>
+                <div id="relationshipList">点击节点查看关联关系</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // 数据定义
+        const nodes = [
+            {id: "APT32", label: "APT32", type: "AG"},
+            {id: "Vietnam", label: "Vietnam", type: "RL"},
+            {id: "government", label: "government", type: "AT"},
+            {id: "APT28", label: "APT28", type: "AG"},
+            {id: "Russia", label: "Russia", type: "RL"},
+            {id: "Hillary Clinton campaign", label: "Hillary Clinton campaign", type: "AE"},
+            {id: "Democratic National Committee", label: "Democratic National Committee", type: "AE"},
+            {id: "Democratic Congressional Campaign Committee", label: "Democratic Congressional Campaign Committee", type: "AE"},
+            {id: "military", label: "military", type: "AT"},
+            {id: "security organizations", label: "security organizations", type: "AT"},
+            {id: "Mimikatz", label: "Mimikatz", type: "AEQ"},
+            {id: "Microsoft Office", label: "Microsoft Office", type: "SI"},
+            {id: "X-Agent", label: "X-Agent", type: "AEQ"},
+            {id: "X-Tunnel", label: "X-Tunnel", type: "AEQ"},
+            {id: "WinIDS", label: "WinIDS", type: "AEQ"},
+            {id: "implants", label: "implants", type: "AEQ"},
+            {id: "Responder", label: "Responder", type: "AEQ"},
+            {id: "APT29", label: "APT29", type: "AG"},
+            {id: "Europe", label: "Europe", type: "RL"},
+            {id: "NATO", label: "NATO", type: "RL"},
+            {id: "SolarWinds Compromise", label: "SolarWinds Compromise", type: "AE"},
+            {id: "UK", label: "UK", type: "RL"},
+            {id: "HAMMERTOSS", label: "HAMMERTOSS", type: "AEQ"},
+            {id: "CHOPSTICK", label: "CHOPSTICK", type: "AEQ"},
+            {id: "POSHSPY", label: "POSHSPY", type: "AEQ"},
+            {id: "malware", label: "malware", type: "AEQ"},
+            {id: "PowerShell", label: "PowerShell", type: "SI"},
+            {id: "WMI", label: "WMI", type: "SI"},
+            {id: "APT30", label: "APT30", type: "AG"},
+            {id: "Chinese", label: "Chinese", type: "RL"},
+            {id: "Naikon", label: "Naikon", type: "AG"},
+            {id: "Southeast Asia", label: "Southeast Asia", type: "RL"},
+            {id: "backdoors", label: "backdoors", type: "AEQ"},
+            {id: "APT38", label: "APT38", type: "AG"},
+            {id: "North Korean", label: "North Korean", type: "RL"},
+            {id: "financial", label: "financial", type: "AI"},
+            {id: "cryptocurrency", label: "cryptocurrency", type: "AI"},
+            {id: "Bangladesh Bank heist", label: "Bangladesh Bank heist", type: "AE"},
+            {id: "Bangladesh Bank", label: "Bangladesh Bank", type: "AT"},
+            {id: "Bluenoroff", label: "Bluenoroff", type: "AG"},
+            {id: "Stardust Chollima", label: "Stardust Chollima", type: "AG"},
+            {id: "NESTEGG", label: "NESTEGG", type: "AEQ"},
+            {id: "NACHOCHEESE", label: "NACHOCHEESE", type: "AEQ"},
+            {id: "APT39", label: "APT39", type: "AG"},
+            {id: "Iranian", label: "Iranian", type: "RL"},
+            {id: "telecommunications", label: "telecommunications", type: "AI"},
+            {id: "technology", label: "technology", type: "AI"},
+            {id: "oil and gas", label: "oil and gas", type: "AI"},
+            {id: "telecom", label: "telecom", type: "AI"},
+            {id: "web shells", label: "web shells", type: "AEQ"},
+            {id: "APT41", label: "APT41", type: "AG"},
+            {id: "healthcare", label: "healthcare", type: "AI"},
+            {id: "video game", label: "video game", type: "AI"},
+            {id: "HIGHNOON", label: "HIGHNOON", type: "AEQ"},
+            {id: "POISONPLUG", label: "POISONPLUG", type: "AEQ"},
+            {id: "HOMEUNIX", label: "HOMEUNIX", type: "AEQ"},
+            {id: "ransomware", label: "ransomware", type: "AEQ"},
+            {id: "BRONZE BUTLER", label: "BRONZE BUTLER", type: "AG"},
+            {id: "biotechnology", label: "biotechnology", type: "AI"},
+            {id: "electronics manufacturing", label: "electronics manufacturing", type: "AI"},
+            {id: "industrial chemistry", label: "industrial chemistry", type: "AI"},
+            {id: "Daserf", label: "Daserf", type: "AEQ"},
+            {id: "xxmm", label: "xxmm", type: "AEQ"},
+            {id: "Kimsuky", label: "Kimsuky", type: "AG"},
+            {id: "South Korean", label: "South Korean", type: "RL"},
+            {id: "Wizard Spider", label: "Wizard Spider", type: "AG"},
+            {id: "TrickBot", label: "TrickBot", type: "AEQ"},
+            {id: "hospitals", label: "hospitals", type: "AI"},
+            {id: "Ryuk", label: "Ryuk", type: "AEQ"},
+            {id: "Conti", label: "Conti", type: "AEQ"},
+            {id: "PowerShell Empire", label: "PowerShell Empire", type: "AEQ"},
+            {id: "RDP", label: "RDP", type: "SI"},
+            {id: "persistence", label: "persistence", type: "AM"},
+            {id: "Registry", label: "Registry", type: "SI"},
+            {id: "spearphishing", label: "spearphishing", type: "AM"},
+            {id: "credential dumping", label: "credential dumping", type: "AM"},
+            {id: "exfiltration", label: "exfiltration", type: "AM"},
+            {id: "lateral movement", label: "lateral movement", type: "AM"},
+            {id: "password spraying", label: "password spraying", type: "AM"},
+            {id: "command and control", label: "command and control", type: "AM"},
+            {id: "C2", label: "C2", type: "AM"},
+            {id: "timestomping", label: "timestomping", type: "AM"},
+            {id: "credential theft", label: "credential theft", type: "AM"},
+            {id: "keylogging", label: "keylogging", type: "AM"},
+            {id: "cloud storage", label: "cloud storage", type: "SI"},
+            {id: "credential harvesting", label: "credential harvesting", type: "AM"},
+            {id: "Philippines", label: "Philippines", type: "RL"},
+            {id: "Laos", label: "Laos", type: "RL"},
+            {id: "Cambodia", label: "Cambodia", type: "RL"}
+        ];
+
+        const links = [
+            {source: "APT32", target: "Vietnam", relation: "operates_in", evidence: "APT32 is a suspected Vietnam-based threat group"},
+            {source: "APT32", target: "government", relation: "targets", evidence: "Targets foreign governments"},
+            {source: "APT28", target: "Hillary Clinton campaign", relation: "attacks", evidence: "Compromised Hillary Clinton campaign"},
+            {source: "APT28", target: "Democratic National Committee", relation: "attacks", evidence: "Compromised Democratic National Committee"},
+            {source: "APT28", target: "Democratic Congressional Campaign Committee", relation: "attacks", evidence: "Compromised DCCC"},
+            {source: "APT28", target: "government", relation: "targets", evidence: "Targets government organizations"},
+            {source: "APT28", target: "military", relation: "targets", evidence: "Targets military organizations"},
+            {source: "APT28", target: "security organizations", relation: "targets", evidence: "Targets security organizations"},
+            {source: "APT28", target: "Mimikatz", relation: "uses", evidence: "Uses Mimikatz for credential dumping"},
+            {source: "APT28", target: "Microsoft Office", relation: "exploits_software", evidence: "Uses spearphishing with Office attachments"},
+            {source: "APT28", target: "X-Agent", relation: "uses", evidence: "Uses X-Agent implant"},
+            {source: "APT28", target: "X-Tunnel", relation: "uses", evidence: "Uses X-Tunnel implant"},
+            {source: "APT28", target: "WinIDS", relation: "uses", evidence: "Uses WinIDS implant"},
+            {source: "APT28", target: "Responder", relation: "uses", evidence: "Uses Responder tool"},
+            {source: "APT29", target: "government", relation: "targets", evidence: "Targets governmental networks"},
+            {source: "APT29", target: "Democratic National Committee", relation: "attacks", evidence: "Compromised DNC"},
+            {source: "APT29", target: "SolarWinds Compromise", relation: "involves", evidence: "Involved in SolarWinds compromise"},
+            {source: "APT29", target: "HAMMERTOSS", relation: "uses", evidence: "Uses HAMMERTOSS malware"},
+            {source: "APT29", target: "CHOPSTICK", relation: "uses", evidence: "Uses CHOPSTICK malware"},
+            {source: "APT29", target: "POSHSPY", relation: "uses", evidence: "Uses POSHSPY malware"},
+            {source: "APT30", target: "Southeast Asia", relation: "operates_in", evidence: "Operates in Southeast Asia"},
+            {source: "APT30", target: "backdoors", relation: "uses", evidence: "Uses custom backdoors"},
+            {source: "APT38", target: "financial", relation: "targets", evidence: "Targets financial institutions"},
+            {source: "APT38", target: "cryptocurrency", relation: "targets", evidence: "Targets cryptocurrency"},
+            {source: "APT38", target: "Bangladesh Bank heist", relation: "involves", evidence: "Involved in Bangladesh Bank heist"},
+            {source: "APT38", target: "NESTEGG", relation: "uses", evidence: "Uses NESTEGG malware"},
+            {source: "APT38", target: "NACHOCHEESE", relation: "uses", evidence: "Uses NACHOCHEESE malware"},
+            {source: "APT39", target: "Iranian", relation: "operates_in", evidence: "Operates in Iran"},
+            {source: "APT39", target: "telecommunications", relation: "targets", evidence: "Targets telecommunications"},
+            {source: "APT39", target: "technology", relation: "targets", evidence: "Targets technology"},
+            {source: "APT39", target: "web shells", relation: "uses", evidence: "Uses web shells"},
+            {source: "APT39", target: "Mimikatz", relation: "uses", evidence: "Uses Mimikatz"},
+            {source: "APT41", target: "technology", relation: "targets", evidence: "Targets technology"},
+            {source: "APT41", target: "telecom", relation: "targets", evidence: "Targets telecom"},
+            {source: "APT41", target: "healthcare", relation: "targets", evidence: "Targets healthcare"},
+            {source: "APT41", target: "video game", relation: "targets", evidence: "Targets video game"},
+            {source: "APT41", target: "HIGHNOON", relation: "uses", evidence: "Uses HIGHNOON malware"},
+            {source: "APT41", target: "POISONPLUG", relation: "uses", evidence: "Uses POISONPLUG malware"},
+            {source: "APT41", target: "HOMEUNIX", relation: "uses", evidence: "Uses HOMEUNIX malware"},
+            {source: "APT41", target: "ransomware", relation: "uses", evidence: "Uses ransomware"},
+            {source: "BRONZE BUTLER", target: "government", relation: "targets", evidence: "Targets government"},
+            {source: "BRONZE BUTLER", target: "technology", relation: "targets", evidence: "Targets technology"},
+            {source: "BRONZE BUTLER", target: "biotechnology", relation: "targets", evidence: "Targets biotechnology"},
+            {source: "BRONZE BUTLER", target: "Daserf", relation: "uses", evidence: "Uses Daserf malware"},
+            {source: "BRONZE BUTLER", target: "xxmm", relation: "uses", evidence: "Uses xxmm malware"},
+            {source: "Kimsuky", target: "UK", relation: "operates_in", evidence: "Operates in UK"},
+            {source: "Kimsuky", target: "malware", relation: "uses", evidence: "Uses malware"},
+            {source: "Wizard Spider", target: "Russia", relation: "operates_in", evidence: "Operates in Russia"},
+            {source: "Wizard Spider", target: "TrickBot", relation: "uses", evidence: "Uses TrickBot"},
+            {source: "Wizard Spider", target: "ransomware", relation: "uses", evidence: "Uses ransomware"},
+            {source: "Wizard Spider", target: "Ryuk", relation: "uses", evidence: "Uses Ryuk ransomware"},
+            {source: "Wizard Spider", target: "Conti", relation: "uses", evidence: "Uses Conti ransomware"},
+            {source: "Wizard Spider", target: "PowerShell Empire", relation: "uses", evidence: "Uses PowerShell Empire"},
+            {source: "Wizard Spider", target: "Mimikatz", relation: "uses", evidence: "Uses Mimikatz"}
+        ];
+
+        // 颜色映射
+        const typeColors = {
+            "AG": "#ff6b6b", // 威胁组织 - 红色
+            "RL": "#4ecdc4", // 地理位置 - 青色
+            "AT": "#45b7d1", // 攻击技术 - 蓝色
+            "AE": "#96ceb4", // 攻击实体 - 绿色
+            "AM": "#feca57", // 攻击方法 - 黄色
+            "AEQ": "#ff9ff3", // 攻击工具 - 粉色
+            "SI": "#54a0ff", // 系统工具 - 浅蓝
+            "AI": "#5f27cd"  // 攻击行业 - 紫色
+        };
+
+        // 节点大小映射
+        const typeSizes = {
+            "AG": 12,
+            "RL": 10,
+            "AT": 8,
+            "AE": 9,
+            "AM": 7,
+            "AEQ": 6,
+            "SI": 5,
+            "AI": 8
+        };
+
+        // 初始化变量
+        let svg, simulation, zoom, tooltip;
+        let currentZoom = 1;
+        let selectedNode = null;
+
+        // 初始化图谱
+        function initGraph() {
+            const graphDiv = document.getElementById('graph');
+            const width = graphDiv.clientWidth;
+            const height = graphDiv.clientHeight - 60; // 减去控制面板高度
+
+            // 创建SVG
+            svg = d3.select('#graph')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .attr('viewBox', [0, 0, width, height]);
+
+            // 创建缩放行为
+            zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                    currentZoom = event.transform.k;
+                });
+
+            svg.call(zoom);
+
+            // 创建容器组
+            const g = svg.append('g');
+
+            // 创建力导向模拟
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(d => typeSizes[d.type] + 10));
+
+            // 创建连线
+            const link = g.append('g')
+                .attr('class', 'links')
+                .selectAll('line')
+                .data(links)
+                .enter().append('line')
+                .attr('class', 'link');
+
+            // 创建连线标签
+            const linkLabels = g.append('g')
+                .attr('class', 'link-labels')
+                .selectAll('text')
+                .data(links)
+                .enter().append('text')
+                .attr('class', 'link-label')
+                .text(d => d.relation)
+                .style('text-anchor', 'middle');
+
+            // 创建节点
+            const node = g.append('g')
+                .attr('class', 'nodes')
+                .selectAll('circle')
+                .data(nodes)
+                .enter().append('circle')
+                .attr('class', 'node')
+                .attr('r', d => typeSizes[d.type])
+                .attr('fill', d => typeColors[d.type])
+                .call(d3.drag()
+                    .on('start', dragStarted)
+                    .on('drag', dragged)
+                    .on('end', dragEnded));
+
+            // 创建节点标签
+            const nodeLabels = g.append('g')
+                .attr('class', 'node-labels')
+                .selectAll('text')
+                .data(nodes)
+                .enter().append('text')
+                .attr('class', 'node-label')
+                .text(d => d.label)
+                .style('font-size', '10px')
+                .style('text-anchor', 'middle')
+                .style('pointer-events', 'none');
+
+            // 鼠标悬停事件
+            node.on('mouseover', showTooltip)
+                .on('mouseout', hideTooltip)
+                .on('click', selectNode);
+
+            link.on('mouseover', showLinkTooltip)
+                .on('mouseout', hideTooltip);
+
+            // 更新模拟
+            simulation.on('tick', () => {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+
+                linkLabels
+                    .attr('x', d => (d.source.x + d.target.x) / 2)
+                    .attr('y', d => (d.source.y + d.target.y) / 2);
+
+                node
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y);
+
+                nodeLabels
+                    .attr('x', d => d.x)
+                    .attr('y', d => d.y + 20);
+            });
+
+            // 初始化工具提示
+            tooltip = d3.select('#tooltip');
+
+            // 搜索功能
+            d3.select('#searchInput').on('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                if (searchTerm.length > 2) {
+                    searchNodes(searchTerm);
+                } else {
+                    resetSearch();
+                }
+            });
+        }
+
+        // 拖拽函数
+        function dragStarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragEnded(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // 显示工具提示
+        function showTooltip(event, d) {
+            tooltip
+                .style('opacity', 1)
+                .html(`<strong>${d.label}</strong><br/>类型: ${getTypeName(d.type)}`)
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 28) + 'px');
+        }
+
+        function showLinkTooltip(event, d) {
+            tooltip
+                .style('opacity', 1)
+                .html(`<strong>关系: ${d.relation}</strong><br/>来源: ${d.source.label}<br/>目标: ${d.target.label}<br/>证据: ${d.evidence}`)
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 28) + 'px');
+        }
+
+        function hideTooltip() {
+            tooltip.style('opacity', 0);
+        }
+
+        // 选择节点
+        function selectNode(event, d) {
+            // 重置之前的选择
+            if (selectedNode) {
+                d3.selectAll('.node').classed('highlighted', false);
+                d3.selectAll('.link').classed('highlight-link', false);
+                d3.selectAll('.node, .link').classed('faded', false);
+            }
+
+            selectedNode = d;
+
+            // 高亮当前节点
+            d3.select(event.currentTarget).classed('highlighted', true);
+
+            // 找到所有相连的节点和边
+            const connectedNodes = new Set();
+            const connectedLinks = [];
+
+            links.forEach(link => {
+                if (link.source.id === d.id || link.target.id === d.id) {
+                    connectedNodes.add(link.source.id);
+                    connectedNodes.add(link.target.id);
+                    connectedLinks.push(link);
+                }
+            });
+
+            // 高亮相连的节点和边
+            d3.selectAll('.node')
+                .classed('faded', node => !connectedNodes.has(node.id) && node.id !== d.id)
+                .classed('highlighted', node => connectedNodes.has(node.id) || node.id === d.id);
+
+            d3.selectAll('.link')
+                .classed('faded', link => !connectedLinks.includes(link))
+                .classed('highlight-link', link => connectedLinks.includes(link));
+
+            // 更新右侧信息面板
+            updateNodeDetails(d);
+            updateRelationshipList(d);
+        }
+
+        // 更新节点详细信息
+        function updateNodeDetails(node) {
+            const detailsDiv = document.getElementById('nodeDetails');
+            detailsDiv.innerHTML = `
+                <strong>${node.label}</strong><br/>
+                <small>ID: ${node.id}</small><br/>
+                <small>类型: ${getTypeName(node.type)}</small><br/>
+                <small>节点大小: ${typeSizes[node.type]}px</small>
+            `;
+        }
+
+        // 更新关联关系列表
+        function updateRelationshipList(node) {
+            const relationshipDiv = document.getElementById('relationshipList');
+            const nodeRelationships = links.filter(link => 
+                link.source.id === node.id || link.target.id === node.id
+            );
+
+            if (nodeRelationships.length === 0) {
+                relationshipDiv.innerHTML = '<p>暂无关联关系</p>';
+                return;
+            }
+
+            relationshipDiv.innerHTML = nodeRelationships.map(link => {
+                const isSource = link.source.id === node.id;
+                const otherNode = isSource ? link.target : link.source;
+                const direction = isSource ? '→' : '←';
+                
+                return `
+                    <div class="relationship-item">
+                        <strong>${isSource ? node.label : otherNode.label}</strong> 
+                        ${direction} 
+                        <strong>${link.relation}</strong> 
+                        ${direction} 
+                        <strong>${isSource ? otherNode.label : node.label}</strong><br/>
+                        <small>${link.evidence}</small>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 搜索节点
+        function searchNodes(searchTerm) {
+            const matchingNodes = nodes.filter(node => 
+                node.label.toLowerCase().includes(searchTerm)
+            );
+
+            if (matchingNodes.length > 0) {
+                // 淡出所有节点
+                d3.selectAll('.node, .link').classed('faded', true);
+                
+                // 高亮匹配的节点
+                matchingNodes.forEach(node => {
+                    d3.selectAll('.node')
+                        .filter(d => d.id === node.id)
+                        .classed('faded', false)
+                        .classed('highlighted', true);
+                });
+
+                // 自动缩放到第一个匹配的节点
+                if (matchingNodes[0].x && matchingNodes[0].y) {
+                    const node = matchingNodes[0];
+                    const scale = 2;
+                    const translate = [
+                        -node.x * scale + svg.node().clientWidth / 2,
+                        -node.y * scale + svg.node().clientHeight / 2
+                    ];
+                    
+                    svg.transition()
+                        .duration(750)
+                        .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+                }
+            }
+        }
+
+        // 重置搜索
+        function resetSearch() {
+            d3.selectAll('.node, .link').classed('faded', false).classed('highlighted', false);
+            if (selectedNode) {
+                selectNode({currentTarget: d3.select(`.node`).filter(d => d.id === selectedNode.id).node()}, selectedNode);
+            }
+        }
+
+        // 缩放控制
+        function zoomIn() {
+            svg.transition().duration(300).call(zoom.scaleBy, 1.3);
+        }
+
+        function zoomOut() {
+            svg.transition().duration(300).call(zoom.scaleBy, 0.7);
+        }
+
+        function resetZoom() {
+            svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+            resetSearch();
+        }
+
+        // 导出PNG
+        function exportPNG() {
+            html2canvas(document.querySelector('.graph-container')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'security_knowledge_graph.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        // 获取类型名称
+        function getTypeName(typeCode) {
+            const typeNames = {
+                "AG": "威胁组织",
+                "RL": "地理位置", 
+                "AT": "攻击技术",
+                "AE": "攻击实体",
+                "AM": "攻击方法",
+                "AEQ": "攻击工具",
+                "SI": "系统工具",
+                "AI": "攻击行业"
+            };
+            return typeNames[typeCode] || typeCode;
+        }
+
+        // 窗口大小变化时重新初始化
+        window.addEventListener('resize', () => {
+            d3.select('#graph svg').remove();
+            initGraph();
+        });
+
+        // 初始化图谱
+        document.addEventListener('DOMContentLoaded', initGraph);
+    </script>
+</body>
+</html>
