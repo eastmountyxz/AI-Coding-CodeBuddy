@@ -1,0 +1,138 @@
+﻿row_id,entity_text,label,normalized,std_id,context_sentence,source_url,group_name
+1,APT32,AG,apt32,,APT32 is a suspected Vietnam-based threat group that has been active since at least 2014,https://attack.mitre.org/groups/G0050/,APT32
+1,Vietnam,RL,vietnam,,APT32 is a suspected Vietnam-based threat group that has been active since at least 2014,https://attack.mitre.org/groups/G0050/,APT32
+1,Philippines,RL,philippines,,"The group has targeted multiple private sector industries as well as foreign governments, dissidents, and journalists with a strong focus on Southeast Asian countries like Vietnam, the Philippines, Laos, and Cambodia",https://attack.mitre.org/groups/G0050/,APT32
+1,Laos,RL,laos,,"The group has targeted multiple private sector industries as well as foreign governments, dissidents, and journalists with a strong focus on Southeast Asian countries like Vietnam, the Philippines, Laos, and Cambodia",https://attack.mitre.org/groups/G0050/,APT32
+1,Cambodia,RL,cambodia,,"The group has targeted multiple private sector industries as well as foreign governments, dissidents, and journalists with a strong focus on Southeast Asian countries like Vietnam, the Philippines, Laos, and Cambodia",https://attack.mitre.org/groups/G0050/,APT32
+1,government,AT,government,,The group is believed to be aligned with Vietnamese government interests,https://attack.mitre.org/groups/G0050/,APT32
+1,persistence,AM,persistence,,APT32 has used Registry Run keys to establish persistence,https://attack.mitre.org/groups/G0050/,APT32
+1,Registry,SI,registry,,APT32 has used Registry Run keys to establish persistence,https://attack.mitre.org/groups/G0050/,APT32
+1,PowerShell,SI,powershell,,APT32 has used PowerShell-based tools and scripts for execution,https://attack.mitre.org/groups/G0050/,APT32
+1,spearphishing,AM,spearphishing,,APT32 has used spearphishing with malicious attachments to gain initial access,https://attack.mitre.org/groups/G0050/,APT32
+2,APT28,AG,apt28,,APT28 is a threat group that has been attributed to Russia's General Staff Main Intelligence Directorate (GRU) 85th Main Special Service Center (GTsSS) military unit 26165,https://attack.mitre.org/groups/G0007/,APT28
+2,military,AT,military,,APT28 is a threat group that has been attributed to Russia's General Staff Main Intelligence Directorate (GRU) 85th Main Special Service Center (GTsSS) military unit 26165,https://attack.mitre.org/groups/G0007/,APT28
+2,Russia,RL,russia,,APT28 is a threat group that has been attributed to Russia's General Staff Main Intelligence Directorate (GRU) 85th Main Special Service Center (GTsSS) military unit 26165,https://attack.mitre.org/groups/G0007/,APT28
+2,Hillary Clinton campaign,AE,hillary clinton campaign,,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S",https://attack.mitre.org/groups/G0007/,APT28
+2,Democratic National Committee,AE,democratic national committee,,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S",https://attack.mitre.org/groups/G0007/,APT28
+2,Democratic Congressional Campaign Committee,AE,democratic congressional campaign committee,,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S",https://attack.mitre.org/groups/G0007/,APT28
+2,Hillary Clinton campaign,AT,hillary clinton campaign,,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S",https://attack.mitre.org/groups/G0007/,APT28
+2,Democratic National Committee,AT,democratic national committee,,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S",https://attack.mitre.org/groups/G0007/,APT28
+2,Democratic Congressional Campaign Committee,AT,democratic congressional campaign committee,,"APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S",https://attack.mitre.org/groups/G0007/,APT28
+2,government,AT,government,,"APT28 has been known to target government, military, and security organizations",https://attack.mitre.org/groups/G0007/,APT28
+2,security organizations,AT,security organizations,,"APT28 has been known to target government, military, and security organizations",https://attack.mitre.org/groups/G0007/,APT28
+2,Mimikatz,AEQ,mimikatz,,APT28 has used credential dumping tools such as Mimikatz,https://attack.mitre.org/groups/G0007/,APT28
+2,credential dumping,AM,credential dumping,,APT28 has used credential dumping tools such as Mimikatz,https://attack.mitre.org/groups/G0007/,APT28
+2,spearphishing,AM,spearphishing,,APT28 has used spearphishing emails with malicious Microsoft Office attachments,https://attack.mitre.org/groups/G0007/,APT28
+2,Microsoft Office,SI,microsoft office,,APT28 has used spearphishing emails with malicious Microsoft Office attachments,https://attack.mitre.org/groups/G0007/,APT28
+2,X-Agent,AEQ,x-agent,,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS",https://attack.mitre.org/groups/G0007/,APT28
+2,X-Tunnel,AEQ,x-tunnel,,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS",https://attack.mitre.org/groups/G0007/,APT28
+2,WinIDS,AEQ,winids,,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS",https://attack.mitre.org/groups/G0007/,APT28
+2,implants,AEQ,implants,,"APT28 has used various implants including X-Agent, X-Tunnel, and WinIDS",https://attack.mitre.org/groups/G0007/,APT28
+2,Responder,AEQ,responder,,APT28 has used the Responder tool to capture credentials via LLMNR/NBT-NS poisoning,https://attack.mitre.org/groups/G0007/,APT28
+2,WinRAR,AEQ,winrar,,APT28 has compressed data before exfiltration using tools like WinRAR.,https://attack.mitre.org/groups/G0007/,APT28
+2,exfiltration,AM,exfiltration,,APT28 has compressed data before exfiltration using tools like WinRAR.,https://attack.mitre.org/groups/G0007/,APT28
+3,APT29,AG,apt29,,APT29 is threat group that has been attributed to Russia's Foreign Intelligence Service (SVR),https://attack.mitre.org/groups/G0016/,APT29
+3,Russia,RL,russia,,APT29 is threat group that has been attributed to Russia's Foreign Intelligence Service (SVR),https://attack.mitre.org/groups/G0016/,APT29
+3,Europe,RL,europe,,"They have operated since at least 2008, often targeting governmental networks in Europe and NATO member countries, research institutes, and think tanks",https://attack.mitre.org/groups/G0016/,APT29
+3,NATO,RL,nato,,"They have operated since at least 2008, often targeting governmental networks in Europe and NATO member countries, research institutes, and think tanks",https://attack.mitre.org/groups/G0016/,APT29
+3,Democratic National Committee,AE,democratic national committee,,APT29 reportedly compromised the Democratic National Committee starting in the summer of 2015,https://attack.mitre.org/groups/G0016/,APT29
+3,Democratic National Committee,AT,democratic national committee,,APT29 reportedly compromised the Democratic National Committee starting in the summer of 2015,https://attack.mitre.org/groups/G0016/,APT29
+3,SolarWinds Compromise,AE,solarwinds compromise,,"In April 2021, the US and UK governments attributed the SolarWinds Compromise to the SVR, which they say was perpetrated by APT29",https://attack.mitre.org/groups/G0016/,APT29
+3,UK,RL,uk,,"In April 2021, the US and UK governments attributed the SolarWinds Compromise to the SVR, which they say was perpetrated by APT29",https://attack.mitre.org/groups/G0016/,APT29
+3,HAMMERTOSS,AEQ,hammertoss,,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY",https://attack.mitre.org/groups/G0016/,APT29
+3,CHOPSTICK,AEQ,chopstick,,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY",https://attack.mitre.org/groups/G0016/,APT29
+3,POSHSPY,AEQ,poshspy,,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY",https://attack.mitre.org/groups/G0016/,APT29
+3,malware,AEQ,malware,,"APT29 has used various malware families including HAMMERTOSS, CHOPSTICK, and POSHSPY",https://attack.mitre.org/groups/G0016/,APT29
+3,PowerShell,SI,powershell,,APT29 has used PowerShell for execution and to download additional payloads,https://attack.mitre.org/groups/G0016/,APT29
+3,spearphishing,AM,spearphishing,,APT29 has used spearphishing with malicious links and attachments for initial access,https://attack.mitre.org/groups/G0016/,APT29
+3,lateral movement,AM,lateral movement,,APT29 has used WMI for lateral movement and persistence,https://attack.mitre.org/groups/G0016/,APT29
+3,persistence,AM,persistence,,APT29 has used WMI for lateral movement and persistence,https://attack.mitre.org/groups/G0016/,APT29
+3,WMI,SI,wmi,,APT29 has used WMI for lateral movement and persistence,https://attack.mitre.org/groups/G0016/,APT29
+3,Mimikatz,AEQ,mimikatz,,APT29 has stolen credentials using tools like Mimikatz and through password spraying attacks.,https://attack.mitre.org/groups/G0016/,APT29
+3,password spraying,AM,password spraying,,APT29 has stolen credentials using tools like Mimikatz and through password spraying attacks.,https://attack.mitre.org/groups/G0016/,APT29
+4,APT30,AG,apt30,,APT30 is a threat group suspected to be associated with the Chinese government,https://attack.mitre.org/groups/G0013/,APT30
+4,government,AT,government,,APT30 is a threat group suspected to be associated with the Chinese government,https://attack.mitre.org/groups/G0013/,APT30
+4,Chinese,RL,china,,APT30 is a threat group suspected to be associated with the Chinese government,https://attack.mitre.org/groups/G0013/,APT30
+4,Naikon,AG,naikon,,"While Naikon shares some characteristics with APT30, the two groups do not appear to be exact matches",https://attack.mitre.org/groups/G0013/,APT30
+4,Southeast Asia,RL,southeast asia,,APT30 has been active since at least 2005 and has primarily targeted organizations in Southeast Asia,https://attack.mitre.org/groups/G0013/,APT30
+4,backdoors,AEQ,backdoors,,APT30 has used custom backdoors for command and control,https://attack.mitre.org/groups/G0013/,APT30
+4,command and control,AM,command and control,,APT30 has used custom backdoors for command and control,https://attack.mitre.org/groups/G0013/,APT30
+4,spearphishing,AM,spearphishing,,APT30 has used spearphishing emails with malicious attachments,https://attack.mitre.org/groups/G0013/,APT30
+4,C2,AM,c2,,APT30 has exfiltrated data over their C2 channel.,https://attack.mitre.org/groups/G0013/,APT30
+5,APT38,AG,apt38,,APT38 is a North Korean state-sponsored threat group that specializes in financial cyber operations,https://attack.mitre.org/groups/G0064/,APT38
+5,financial,AI,financial,,APT38 is a North Korean state-sponsored threat group that specializes in financial cyber operations,https://attack.mitre.org/groups/G0064/,APT38
+5,North Korean,RL,north korea,,APT38 is a North Korean state-sponsored threat group that specializes in financial cyber operations,https://attack.mitre.org/groups/G0064/,APT38
+5,cryptocurrency,AI,cryptocurrency,,"Active since at least 2014, APT38 has targeted banks, financial institutions, casinos, and cryptocurrency exchanges worldwide to steal money and cryptocurrency",https://attack.mitre.org/groups/G0064/,APT38
+5,Bangladesh Bank heist,AE,bangladesh bank heist,,The group has been linked to the 2016 Bangladesh Bank heist,https://attack.mitre.org/groups/G0064/,APT38
+5,Bangladesh Bank,AT,bangladesh bank,,The group has been linked to the 2016 Bangladesh Bank heist,https://attack.mitre.org/groups/G0064/,APT38
+5,Bluenoroff,AG,bluenoroff,,APT38 is also known as Bluenoroff and Stardust Chollima,https://attack.mitre.org/groups/G0064/,APT38
+5,Stardust Chollima,AG,stardust chollima,,APT38 is also known as Bluenoroff and Stardust Chollima,https://attack.mitre.org/groups/G0064/,APT38
+5,NESTEGG,AEQ,nestegg,,APT38 has used custom malware families including NESTEGG and NACHOCHEESE,https://attack.mitre.org/groups/G0064/,APT38
+5,NACHOCHEESE,AEQ,nachocheese,,APT38 has used custom malware families including NESTEGG and NACHOCHEESE,https://attack.mitre.org/groups/G0064/,APT38
+5,malware,AEQ,malware,,APT38 has used custom malware families including NESTEGG and NACHOCHEESE,https://attack.mitre.org/groups/G0064/,APT38
+5,PowerShell,SI,powershell,,APT38 has used PowerShell for execution and to download additional tools,https://attack.mitre.org/groups/G0064/,APT38
+5,spearphishing,AM,spearphishing,,APT38 has used spearphishing with malicious attachments to gain initial access,https://attack.mitre.org/groups/G0064/,APT38
+5,credential dumping,AM,credential dumping,,APT38 has used credential dumping tools to obtain account credentials,https://attack.mitre.org/groups/G0064/,APT38
+5,timestomping,AM,timestomping,,APT38 has deleted logs and used timestomping to hide their activities.,https://attack.mitre.org/groups/G0064/,APT38
+6,APT39,AG,apt39,,APT39 is an Iranian cyber espionage group that has been active since at least 2014,https://attack.mitre.org/groups/G0087/,APT39
+6,Iranian,RL,iran,,APT39 is an Iranian cyber espionage group that has been active since at least 2014,https://attack.mitre.org/groups/G0087/,APT39
+6,telecommunications,AI,telecommunications,,"The group has targeted a wide range of industries including telecommunications, travel, technology, and oil and gas sectors",https://attack.mitre.org/groups/G0087/,APT39
+6,technology,AI,technology,,"The group has targeted a wide range of industries including telecommunications, travel, technology, and oil and gas sectors",https://attack.mitre.org/groups/G0087/,APT39
+6,oil and gas,AI,oil and gas,,"The group has targeted a wide range of industries including telecommunications, travel, technology, and oil and gas sectors",https://attack.mitre.org/groups/G0087/,APT39
+6,credential theft,AM,credential theft,,APT39 has used various custom and publicly available tools for credential theft,https://attack.mitre.org/groups/G0087/,APT39
+6,spearphishing,AM,spearphishing,,APT39 has used spearphishing with malicious links and attachments,https://attack.mitre.org/groups/G0087/,APT39
+6,web shells,AEQ,web shells,,APT39 has used web shells for persistence and command execution,https://attack.mitre.org/groups/G0087/,APT39
+6,persistence,AM,persistence,,APT39 has used web shells for persistence and command execution,https://attack.mitre.org/groups/G0087/,APT39
+6,Mimikatz,AEQ,mimikatz,,APT39 has used tools like Mimikatz to dump credentials from memory.,https://attack.mitre.org/groups/G0087/,APT39
+7,APT41,AG,apt41,,APT41 is a Chinese state-sponsored espionage group that has been active since at least 2012,https://attack.mitre.org/groups/G0096/,APT41
+7,Chinese,RL,china,,APT41 is a Chinese state-sponsored espionage group that has been active since at least 2012,https://attack.mitre.org/groups/G0096/,APT41
+7,telecom,AI,telecommunications,,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries",https://attack.mitre.org/groups/G0096/,APT41
+7,healthcare,AI,healthcare,,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries",https://attack.mitre.org/groups/G0096/,APT41
+7,technology,AI,technology,,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries",https://attack.mitre.org/groups/G0096/,APT41
+7,video game,AI,video game,,"The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries",https://attack.mitre.org/groups/G0096/,APT41
+7,HIGHNOON,AEQ,highnoon,,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX",https://attack.mitre.org/groups/G0096/,APT41
+7,POISONPLUG,AEQ,poisonplug,,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX",https://attack.mitre.org/groups/G0096/,APT41
+7,HOMEUNIX,AEQ,homeunix,,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX",https://attack.mitre.org/groups/G0096/,APT41
+7,malware,AEQ,malware,,"APT41 has used various malware families including HIGHNOON, POISONPLUG, and HOMEUNIX",https://attack.mitre.org/groups/G0096/,APT41
+7,credential dumping,AM,credential dumping,,APT41 has used credential dumping tools to obtain passwords,https://attack.mitre.org/groups/G0096/,APT41
+7,web shells,AEQ,web shells,,APT41 has used web shells for persistence,https://attack.mitre.org/groups/G0096/,APT41
+7,persistence,AM,persistence,,APT41 has used web shells for persistence,https://attack.mitre.org/groups/G0096/,APT41
+7,ransomware,AEQ,ransomware,,APT41 has deployed ransomware for financial gain.,https://attack.mitre.org/groups/G0096/,APT41
+7,financial,AI,financial,,APT41 has deployed ransomware for financial gain.,https://attack.mitre.org/groups/G0096/,APT41
+8,BRONZE BUTLER,AG,bronze butler,,BRONZE BUTLER is a cyber espionage group with likely Chinese origins that has been active since at least 2008,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,Chinese,RL,china,,BRONZE BUTLER is a cyber espionage group with likely Chinese origins that has been active since at least 2008,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,government,AT,government,,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors",https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,biotechnology,AI,biotechnology,,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors",https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,electronics manufacturing,AI,electronics manufacturing,,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors",https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,industrial chemistry,AI,industrial chemistry,,"The group primarily targets Japanese organizations, particularly in the government, biotechnology, electronics manufacturing, and industrial chemistry sectors",https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,Daserf,AEQ,daserf,,BRONZE BUTLER has used custom malware including Daserf and xxmm,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,xxmm,AEQ,xxmm,,BRONZE BUTLER has used custom malware including Daserf and xxmm,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,malware,AEQ,malware,,BRONZE BUTLER has used custom malware including Daserf and xxmm,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,spearphishing,AM,spearphishing,,BRONZE BUTLER has used spearphishing emails with malicious attachments,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,persistence,AM,persistence,,BRONZE BUTLER has used scheduled tasks for persistence,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+8,exfiltration,AM,exfiltration,,BRONZE BUTLER has compressed stolen data before exfiltration.,https://attack.mitre.org/groups/G1002/,BRONZE BUTLER
+9,Kimsuky,AG,kimsuky,,Kimsuky is a North Korean-based threat group that has been active since at least 2012,https://attack.mitre.org/groups/G0094/,Kimsuky
+9,North Korean,RL,north korea,,Kimsuky is a North Korean-based threat group that has been active since at least 2012,https://attack.mitre.org/groups/G0094/,Kimsuky
+9,government,AT,government,,"The group initially focused on South Korean government entities, think tanks, and individuals identified as experts in various fields, but has expanded its operations worldwide",https://attack.mitre.org/groups/G0094/,Kimsuky
+9,South Korean,RL,south korea,,"The group initially focused on South Korean government entities, think tanks, and individuals identified as experts in various fields, but has expanded its operations worldwide",https://attack.mitre.org/groups/G0094/,Kimsuky
+9,malware,AEQ,malware,,Kimsuky has used various custom tools and malware for espionage,https://attack.mitre.org/groups/G0094/,Kimsuky
+9,spearphishing,AM,spearphishing,,Kimsuky has used spearphishing with malicious attachments and links,https://attack.mitre.org/groups/G0094/,Kimsuky
+9,credential harvesting,AM,credential harvesting,,Kimsuky has stolen credentials through keylogging and credential harvesting,https://attack.mitre.org/groups/G0094/,Kimsuky
+9,keylogging,AM,keylogging,,Kimsuky has stolen credentials through keylogging and credential harvesting,https://attack.mitre.org/groups/G0094/,Kimsuky
+9,command and control,AM,command and control,,Kimsuky has used cloud storage services for command and control.,https://attack.mitre.org/groups/G0094/,Kimsuky
+9,cloud storage,SI,cloud storage,,Kimsuky has used cloud storage services for command and control.,https://attack.mitre.org/groups/G0094/,Kimsuky
+10,Wizard Spider,AG,wizard spider,,Wizard Spider is a Russia-based financially motivated threat group originally known for the creation and deployment of TrickBot since at least 2016,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,TrickBot,AEQ,trickbot,,Wizard Spider is a Russia-based financially motivated threat group originally known for the creation and deployment of TrickBot since at least 2016,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,Russia,RL,russia,,Wizard Spider is a Russia-based financially motivated threat group originally known for the creation and deployment of TrickBot since at least 2016,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,ransomware,AEQ,ransomware,,"Wizard Spider possesses a diverse aresenal of tools and has conducted ransomware campaigns against a variety of organizations, ranging from major corporations to hospitals",https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,hospitals,AI,hospitals,,"Wizard Spider possesses a diverse aresenal of tools and has conducted ransomware campaigns against a variety of organizations, ranging from major corporations to hospitals",https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,malware,AEQ,malware,,Wizard Spider has used TrickBot malware for initial access and credential theft,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,credential theft,AM,credential theft,,Wizard Spider has used TrickBot malware for initial access and credential theft,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,Ryuk,AEQ,ryuk,,Wizard Spider has deployed Ryuk and Conti ransomware,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,Conti,AEQ,conti,,Wizard Spider has deployed Ryuk and Conti ransomware,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,PowerShell Empire,AEQ,powershell empire,,Wizard Spider has used PowerShell Empire for post-exploitation,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,PowerShell,SI,powershell,,Wizard Spider has used PowerShell Empire for post-exploitation,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,Mimikatz,AEQ,mimikatz,,Wizard Spider has used credential dumping tools like Mimikatz,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,credential dumping,AM,credential dumping,,Wizard Spider has used credential dumping tools like Mimikatz,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,lateral movement,AM,lateral movement,,Wizard Spider has used RDP for lateral movement.,https://attack.mitre.org/groups/G0102/,Wizard Spider
+10,RDP,SI,rdp,,Wizard Spider has used RDP for lateral movement.,https://attack.mitre.org/groups/G0102/,Wizard Spider
