@@ -1,0 +1,1051 @@
+{
+  "nodes": [
+    {
+      "id": "APT32",
+      "label": "AG",
+      "group": "APT32"
+    },
+    {
+      "id": "Vietnam",
+      "label": "RL",
+      "group": "APT32"
+    },
+    {
+      "id": "Philippines",
+      "label": "RL",
+      "group": "APT32"
+    },
+    {
+      "id": "Laos",
+      "label": "RL",
+      "group": "APT32"
+    },
+    {
+      "id": "Cambodia",
+      "label": "RL",
+      "group": "APT32"
+    },
+    {
+      "id": "government",
+      "label": "AT",
+      "group": "APT32"
+    },
+    {
+      "id": "persistence",
+      "label": "AM",
+      "group": "APT32"
+    },
+    {
+      "id": "Registry",
+      "label": "SI",
+      "group": "APT32"
+    },
+    {
+      "id": "PowerShell",
+      "label": "SI",
+      "group": "APT32"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "APT32"
+    },
+    {
+      "id": "APT28",
+      "label": "AG",
+      "group": "APT28"
+    },
+    {
+      "id": "military",
+      "label": "AT",
+      "group": "APT28"
+    },
+    {
+      "id": "Russia",
+      "label": "RL",
+      "group": "APT28"
+    },
+    {
+      "id": "Hillary Clinton campaign",
+      "label": "AE",
+      "group": "APT28"
+    },
+    {
+      "id": "Democratic National Committee",
+      "label": "AE",
+      "group": "APT28"
+    },
+    {
+      "id": "Democratic Congressional Campaign Committee",
+      "label": "AE",
+      "group": "APT28"
+    },
+    {
+      "id": "Hillary Clinton campaign",
+      "label": "AT",
+      "group": "APT28"
+    },
+    {
+      "id": "Democratic National Committee",
+      "label": "AT",
+      "group": "APT28"
+    },
+    {
+      "id": "Democratic Congressional Campaign Committee",
+      "label": "AT",
+      "group": "APT28"
+    },
+    {
+      "id": "government",
+      "label": "AT",
+      "group": "APT28"
+    },
+    {
+      "id": "security organizations",
+      "label": "AT",
+      "group": "APT28"
+    },
+    {
+      "id": "Mimikatz",
+      "label": "AEQ",
+      "group": "APT28"
+    },
+    {
+      "id": "credential dumping",
+      "label": "AM",
+      "group": "APT28"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "APT28"
+    },
+    {
+      "id": "Microsoft Office",
+      "label": "SI",
+      "group": "APT28"
+    },
+    {
+      "id": "X-Agent",
+      "label": "AEQ",
+      "group": "APT28"
+    },
+    {
+      "id": "X-Tunnel",
+      "label": "AEQ",
+      "group": "APT28"
+    },
+    {
+      "id": "WinIDS",
+      "label": "AEQ",
+      "group": "APT28"
+    },
+    {
+      "id": "implants",
+      "label": "AEQ",
+      "group": "APT28"
+    },
+    {
+      "id": "Responder",
+      "label": "AEQ",
+      "group": "APT28"
+    },
+    {
+      "id": "WinRAR",
+      "label": "AEQ",
+      "group": "APT28"
+    },
+    {
+      "id": "exfiltration",
+      "label": "AM",
+      "group": "APT28"
+    },
+    {
+      "id": "APT29",
+      "label": "AG",
+      "group": "APT29"
+    },
+    {
+      "id": "Russia",
+      "label": "RL",
+      "group": "APT29"
+    },
+    {
+      "id": "Europe",
+      "label": "RL",
+      "group": "APT29"
+    },
+    {
+      "id": "NATO",
+      "label": "RL",
+      "group": "APT29"
+    },
+    {
+      "id": "Democratic National Committee",
+      "label": "AE",
+      "group": "APT29"
+    },
+    {
+      "id": "Democratic National Committee",
+      "label": "AT",
+      "group": "APT29"
+    },
+    {
+      "id": "SolarWinds Compromise",
+      "label": "AE",
+      "group": "APT29"
+    },
+    {
+      "id": "UK",
+      "label": "RL",
+      "group": "APT29"
+    },
+    {
+      "id": "HAMMERTOSS",
+      "label": "AEQ",
+      "group": "APT29"
+    },
+    {
+      "id": "CHOPSTICK",
+      "label": "AEQ",
+      "group": "APT29"
+    },
+    {
+      "id": "POSHSPY",
+      "label": "AEQ",
+      "group": "APT29"
+    },
+    {
+      "id": "malware",
+      "label": "AEQ",
+      "group": "APT29"
+    },
+    {
+      "id": "PowerShell",
+      "label": "SI",
+      "group": "APT29"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "APT29"
+    },
+    {
+      "id": "lateral movement",
+      "label": "AM",
+      "group": "APT29"
+    },
+    {
+      "id": "persistence",
+      "label": "AM",
+      "group": "APT29"
+    },
+    {
+      "id": "WMI",
+      "label": "SI",
+      "group": "APT29"
+    },
+    {
+      "id": "Mimikatz",
+      "label": "AEQ",
+      "group": "APT29"
+    },
+    {
+      "id": "password spraying",
+      "label": "AM",
+      "group": "APT29"
+    },
+    {
+      "id": "APT30",
+      "label": "AG",
+      "group": "APT30"
+    },
+    {
+      "id": "government",
+      "label": "AT",
+      "group": "APT30"
+    },
+    {
+      "id": "Chinese",
+      "label": "RL",
+      "group": "APT30"
+    },
+    {
+      "id": "Naikon",
+      "label": "AG",
+      "group": "APT30"
+    },
+    {
+      "id": "Southeast Asia",
+      "label": "RL",
+      "group": "APT30"
+    },
+    {
+      "id": "backdoors",
+      "label": "AEQ",
+      "group": "APT30"
+    },
+    {
+      "id": "command and control",
+      "label": "AM",
+      "group": "APT30"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "APT30"
+    },
+    {
+      "id": "C2",
+      "label": "AM",
+      "group": "APT30"
+    },
+    {
+      "id": "APT38",
+      "label": "AG",
+      "group": "APT38"
+    },
+    {
+      "id": "financial",
+      "label": "AI",
+      "group": "APT38"
+    },
+    {
+      "id": "North Korean",
+      "label": "RL",
+      "group": "APT38"
+    },
+    {
+      "id": "cryptocurrency",
+      "label": "AI",
+      "group": "APT38"
+    },
+    {
+      "id": "Bangladesh Bank heist",
+      "label": "AE",
+      "group": "APT38"
+    },
+    {
+      "id": "Bangladesh Bank",
+      "label": "AT",
+      "group": "APT38"
+    },
+    {
+      "id": "Bluenoroff",
+      "label": "AG",
+      "group": "APT38"
+    },
+    {
+      "id": "Stardust Chollima",
+      "label": "AG",
+      "group": "APT38"
+    },
+    {
+      "id": "NESTEGG",
+      "label": "AEQ",
+      "group": "APT38"
+    },
+    {
+      "id": "NACHOCHEESE",
+      "label": "AEQ",
+      "group": "APT38"
+    },
+    {
+      "id": "malware",
+      "label": "AEQ",
+      "group": "APT38"
+    },
+    {
+      "id": "PowerShell",
+      "label": "SI",
+      "group": "APT38"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "APT38"
+    },
+    {
+      "id": "credential dumping",
+      "label": "AM",
+      "group": "APT38"
+    },
+    {
+      "id": "timestomping",
+      "label": "AM",
+      "group": "APT38"
+    },
+    {
+      "id": "APT39",
+      "label": "AG",
+      "group": "APT39"
+    },
+    {
+      "id": "Iranian",
+      "label": "RL",
+      "group": "APT39"
+    },
+    {
+      "id": "telecommunications",
+      "label": "AI",
+      "group": "APT39"
+    },
+    {
+      "id": "technology",
+      "label": "AI",
+      "group": "APT39"
+    },
+    {
+      "id": "oil and gas",
+      "label": "AI",
+      "group": "APT39"
+    },
+    {
+      "id": "credential theft",
+      "label": "AM",
+      "group": "APT39"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "APT39"
+    },
+    {
+      "id": "web shells",
+      "label": "AEQ",
+      "group": "APT39"
+    },
+    {
+      "id": "persistence",
+      "label": "AM",
+      "group": "APT39"
+    },
+    {
+      "id": "Mimikatz",
+      "label": "AEQ",
+      "group": "APT39"
+    },
+    {
+      "id": "APT41",
+      "label": "AG",
+      "group": "APT41"
+    },
+    {
+      "id": "Chinese",
+      "label": "RL",
+      "group": "APT41"
+    },
+    {
+      "id": "telecom",
+      "label": "AI",
+      "group": "APT41"
+    },
+    {
+      "id": "healthcare",
+      "label": "AI",
+      "group": "APT41"
+    },
+    {
+      "id": "technology",
+      "label": "AI",
+      "group": "APT41"
+    },
+    {
+      "id": "video game",
+      "label": "AI",
+      "group": "APT41"
+    },
+    {
+      "id": "HIGHNOON",
+      "label": "AEQ",
+      "group": "APT41"
+    },
+    {
+      "id": "POISONPLUG",
+      "label": "AEQ",
+      "group": "APT41"
+    },
+    {
+      "id": "HOMEUNIX",
+      "label": "AEQ",
+      "group": "APT41"
+    },
+    {
+      "id": "malware",
+      "label": "AEQ",
+      "group": "APT41"
+    },
+    {
+      "id": "credential dumping",
+      "label": "AM",
+      "group": "APT41"
+    },
+    {
+      "id": "web shells",
+      "label": "AEQ",
+      "group": "APT41"
+    },
+    {
+      "id": "persistence",
+      "label": "AM",
+      "group": "APT41"
+    },
+    {
+      "id": "ransomware",
+      "label": "AEQ",
+      "group": "APT41"
+    },
+    {
+      "id": "financial",
+      "label": "AI",
+      "group": "APT41"
+    },
+    {
+      "id": "BRONZE BUTLER",
+      "label": "AG",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "Chinese",
+      "label": "RL",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "government",
+      "label": "AT",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "biotechnology",
+      "label": "AI",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "electronics manufacturing",
+      "label": "AI",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "industrial chemistry",
+      "label": "AI",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "Daserf",
+      "label": "AEQ",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "xxmm",
+      "label": "AEQ",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "malware",
+      "label": "AEQ",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "persistence",
+      "label": "AM",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "exfiltration",
+      "label": "AM",
+      "group": "BRONZE BUTLER"
+    },
+    {
+      "id": "Kimsuky",
+      "label": "AG",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "North Korean",
+      "label": "RL",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "government",
+      "label": "AT",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "South Korean",
+      "label": "RL",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "malware",
+      "label": "AEQ",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "spearphishing",
+      "label": "AM",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "credential harvesting",
+      "label": "AM",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "keylogging",
+      "label": "AM",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "command and control",
+      "label": "AM",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "cloud storage",
+      "label": "SI",
+      "group": "Kimsuky"
+    },
+    {
+      "id": "Wizard Spider",
+      "label": "AG",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "TrickBot",
+      "label": "AEQ",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "Russia",
+      "label": "RL",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "ransomware",
+      "label": "AEQ",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "hospitals",
+      "label": "AI",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "malware",
+      "label": "AEQ",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "credential theft",
+      "label": "AM",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "Ryuk",
+      "label": "AEQ",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "Conti",
+      "label": "AEQ",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "PowerShell Empire",
+      "label": "AEQ",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "PowerShell",
+      "label": "SI",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "Mimikatz",
+      "label": "AEQ",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "credential dumping",
+      "label": "AM",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "lateral movement",
+      "label": "AM",
+      "group": "Wizard Spider"
+    },
+    {
+      "id": "RDP",
+      "label": "SI",
+      "group": "Wizard Spider"
+    }
+  ],
+  "links": [
+    {
+      "source": "APT32",
+      "target": "Vietnam",
+      "relation": "operates_in"
+    },
+    {
+      "source": "APT32",
+      "target": "government",
+      "relation": "targets"
+    },
+    {
+      "source": "APT28",
+      "target": "Hillary Clinton campaign",
+      "relation": "attacks"
+    },
+    {
+      "source": "APT28",
+      "target": "Democratic National Committee",
+      "relation": "attacks"
+    },
+    {
+      "source": "APT28",
+      "target": "Democratic Congressional Campaign Committee",
+      "relation": "attacks"
+    },
+    {
+      "source": "Hillary Clinton campaign",
+      "target": "APT28",
+      "relation": "involves"
+    },
+    {
+      "source": "Democratic National Committee",
+      "target": "APT28",
+      "relation": "involves"
+    },
+    {
+      "source": "Democratic Congressional Campaign Committee",
+      "target": "APT28",
+      "relation": "involves"
+    },
+    {
+      "source": "APT28",
+      "target": "government",
+      "relation": "targets"
+    },
+    {
+      "source": "APT28",
+      "target": "military",
+      "relation": "targets"
+    },
+    {
+      "source": "APT28",
+      "target": "security organizations",
+      "relation": "targets"
+    },
+    {
+      "source": "APT28",
+      "target": "Mimikatz",
+      "relation": "uses"
+    },
+    {
+      "source": "APT28",
+      "target": "Microsoft Office",
+      "relation": "exploits_software"
+    },
+    {
+      "source": "APT28",
+      "target": "X-Agent",
+      "relation": "uses"
+    },
+    {
+      "source": "APT28",
+      "target": "X-Tunnel",
+      "relation": "uses"
+    },
+    {
+      "source": "APT28",
+      "target": "WinIDS",
+      "relation": "uses"
+    },
+    {
+      "source": "APT28",
+      "target": "implants",
+      "relation": "uses"
+    },
+    {
+      "source": "APT28",
+      "target": "Responder",
+      "relation": "uses"
+    },
+    {
+      "source": "APT29",
+      "target": "government",
+      "relation": "targets"
+    },
+    {
+      "source": "APT29",
+      "target": "Democratic National Committee",
+      "relation": "attacks"
+    },
+    {
+      "source": "Democratic National Committee",
+      "target": "APT29",
+      "relation": "involves"
+    },
+    {
+      "source": "SolarWinds Compromise",
+      "target": "APT29",
+      "relation": "involves"
+    },
+    {
+      "source": "APT29",
+      "target": "HAMMERTOSS",
+      "relation": "uses"
+    },
+    {
+      "source": "APT29",
+      "target": "CHOPSTICK",
+      "relation": "uses"
+    },
+    {
+      "source": "APT29",
+      "target": "POSHSPY",
+      "relation": "uses"
+    },
+    {
+      "source": "APT29",
+      "target": "malware",
+      "relation": "uses"
+    },
+    {
+      "source": "APT30",
+      "target": "Southeast Asia",
+      "relation": "operates_in"
+    },
+    {
+      "source": "APT30",
+      "target": "backdoors",
+      "relation": "uses"
+    },
+    {
+      "source": "APT38",
+      "target": "financial",
+      "relation": "targets"
+    },
+    {
+      "source": "APT38",
+      "target": "cryptocurrency",
+      "relation": "targets"
+    },
+    {
+      "source": "Bangladesh Bank heist",
+      "target": "APT38",
+      "relation": "involves"
+    },
+    {
+      "source": "APT38",
+      "target": "malware",
+      "relation": "uses"
+    },
+    {
+      "source": "APT38",
+      "target": "NESTEGG",
+      "relation": "uses"
+    },
+    {
+      "source": "APT38",
+      "target": "NACHOCHEESE",
+      "relation": "uses"
+    },
+    {
+      "source": "APT39",
+      "target": "Iranian",
+      "relation": "operates_in"
+    },
+    {
+      "source": "APT39",
+      "target": "telecommunications",
+      "relation": "targets"
+    },
+    {
+      "source": "APT39",
+      "target": "technology",
+      "relation": "targets"
+    },
+    {
+      "source": "APT39",
+      "target": "oil and gas",
+      "relation": "targets"
+    },
+    {
+      "source": "APT39",
+      "target": "telecom",
+      "relation": "targets"
+    },
+    {
+      "source": "APT39",
+      "target": "web shells",
+      "relation": "uses"
+    },
+    {
+      "source": "APT39",
+      "target": "Mimikatz",
+      "relation": "uses"
+    },
+    {
+      "source": "APT41",
+      "target": "Chinese",
+      "relation": "operates_in"
+    },
+    {
+      "source": "APT41",
+      "target": "technology",
+      "relation": "targets"
+    },
+    {
+      "source": "APT41",
+      "target": "telecom",
+      "relation": "targets"
+    },
+    {
+      "source": "APT41",
+      "target": "healthcare",
+      "relation": "targets"
+    },
+    {
+      "source": "APT41",
+      "target": "video game",
+      "relation": "targets"
+    },
+    {
+      "source": "APT41",
+      "target": "malware",
+      "relation": "uses"
+    },
+    {
+      "source": "APT41",
+      "target": "HIGHNOON",
+      "relation": "uses"
+    },
+    {
+      "source": "APT41",
+      "target": "POISONPLUG",
+      "relation": "uses"
+    },
+    {
+      "source": "APT41",
+      "target": "HOMEUNIX",
+      "relation": "uses"
+    },
+    {
+      "source": "APT41",
+      "target": "web shells",
+      "relation": "uses"
+    },
+    {
+      "source": "APT41",
+      "target": "ransomware",
+      "relation": "uses"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "Chinese",
+      "relation": "operates_in"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "government",
+      "relation": "targets"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "technology",
+      "relation": "targets"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "biotechnology",
+      "relation": "targets"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "electronics manufacturing",
+      "relation": "targets"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "industrial chemistry",
+      "relation": "targets"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "malware",
+      "relation": "uses"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "Daserf",
+      "relation": "uses"
+    },
+    {
+      "source": "BRONZE BUTLER",
+      "target": "xxmm",
+      "relation": "uses"
+    },
+    {
+      "source": "Kimsuky",
+      "target": "UK",
+      "relation": "operates_in"
+    },
+    {
+      "source": "Kimsuky",
+      "target": "North Korean",
+      "relation": "operates_in"
+    },
+    {
+      "source": "Kimsuky",
+      "target": "malware",
+      "relation": "uses"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "Russia",
+      "relation": "operates_in"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "malware",
+      "relation": "uses"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "TrickBot",
+      "relation": "uses"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "ransomware",
+      "relation": "uses"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "Ryuk",
+      "relation": "uses"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "Conti",
+      "relation": "uses"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "PowerShell Empire",
+      "relation": "uses"
+    },
+    {
+      "source": "Wizard Spider",
+      "target": "Mimikatz",
+      "relation": "uses"
+    }
+  ]
+}
