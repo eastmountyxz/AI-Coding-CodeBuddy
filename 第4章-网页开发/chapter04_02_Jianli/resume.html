@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小珞 - 安全工程师简历</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #333;
+        }
+        .header p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #666;
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 30px;
+            overflow: hidden;
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .contact-info {
+            text-align: left;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 24px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .keyword {
+            color: #0066cc;
+            font-weight: 600;
+        }
+        .education-item, .research-item, .experience-item, .skills-item {
+            margin-bottom: 15px;
+        }
+        .project-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .date {
+            color: #666;
+            font-style: italic;
+        }
+        .skills-category {
+            margin-bottom: 10px;
+        }
+        .skills-list {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 基本信息 -->
+        <div class="header">
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img src="xiaoluo.png" alt="小珞的照片">
+                </div>
+                <div class="contact-info">
+                    <h1>小珞</h1>
+                    <p>电话: 152XXXXXXXX | 邮箱: xiaoluo@163.com</p>
+                    <p>求职意向: <span class="keyword">安全工程师</span> (恶意代码分析方向)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教育经历 -->
+        <div class="section">
+            <h2 class="section-title">教育经历</h2>
+            <div class="education-item">
+                <p><span class="keyword">XX大学</span> | 硕士 | 网络安全学院 | 网络空间安全专业</p>
+                <p class="date">2020年09月 - 2023年06月</p>
+                <p>学术成就: 年级排名 <span class="keyword">前5%</span></p>
+            </div>
+            <div class="education-item">
+                <p><span class="keyword">XX大学</span> | 本科 | 网络安全学院 | 信息安全专业</p>
+                <p class="date">2016年09月 - 2020年06月</p>
+                <p>学术成就: GPA <span class="keyword">3.8/4.0</span></p>
+            </div>
+        </div>
+
+        <!-- 科研与比赛经历 -->
+        <div class="section">
+            <h2 class="section-title">科研与比赛经历</h2>
+            <div class="research-item">
+                <p><span class="keyword">学术发表</span>: 第一作者. 基于深度学习的混淆恶意请求检测方法. 计算机学报, 2022.</p>
+            </div>
+            <div class="research-item">
+                <p><span class="keyword">竞赛成就</span>: DataCon2022大数据安全分析竞赛涉网安全分析赛道全国第二名</p>
+            </div>
+            <div class="research-item">
+                <p><span class="keyword">行业认可</span>: 华为云2022年度开发者社区十佳博主 & 华为云云享专家</p>
+            </div>
+        </div>
+
+        <!-- 实践经验 -->
+        <div class="section">
+            <h2 class="section-title">实践经验</h2>
+            <div class="experience-item">
+                <div class="project-title">恶意代码深度分析与家族检测研究</div>
+                <p class="date">2021年12月 - 2022年12月</p>
+                <p><span class="keyword">项目概述</span>: 结合恶意代码实际需求，开展恶意代码深度分析研究</p>
+                <p><span class="keyword">负责内容</span>:</p>
+                <ul>
+                    <li>利用<span class="keyword">IDA</span>和<span class="keyword">OllyDbg</span>逆向工具、沙箱环境开展动静态行为分析研究</li>
+                    <li>结合病毒传播方式搭建<span class="keyword">深度学习模型</span>，检测恶意代码家族</li>
+                    <li>分析恶意代码的传播机制和防护技巧，形成详细的分析报告</li>
+                    <li>该研究获得项目组高度认可，分析方法被应用于实际安全防护系统</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <div class="project-title">AI赋能的大规模威胁自动化分析与推理研究</div>
+                <p class="date">2022年3月 - 2023年3月</p>
+                <p><span class="keyword">项目概述</span>: 对大规模威胁开展自动化分析研究</p>
+                <p><span class="keyword">负责内容</span>:</p>
+                <ul>
+                    <li>详细分析威胁日志并构建<span class="keyword">溯源图</span>（包含进程、文件、注册表、调用关系等）</li>
+                    <li>利用<span class="keyword">图神经网络</span>和<span class="keyword">知识图谱</span>开展威胁关联分析和推理研究</li>
+                    <li>发现威胁行为并还原攻击场景，提高了威胁检测的准确率和效率</li>
+                    <li>设计实现了自动化分析流程，大幅减少了人工分析时间</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 专业技能 -->
+        <div class="section">
+            <h2 class="section-title">专业技能</h2>
+            <div class="skills-item">
+                <div class="skills-category">
+                    <span class="keyword">英语能力</span>:
+                    <div class="skills-list">通过CET-6，具备良好的英文文档阅读和技术交流能力</div>
+                </div>
+            </div>
+            <div class="skills-item">
+                <div class="skills-category">
+                    <span class="keyword">编程能力</span>:
+                    <div class="skills-list">精通Python编程，熟练掌握C/C++开发，了解汇编语言，能够进行底层代码分析</div>
+                </div>
+            </div>
+            <div class="skills-item">
+                <div class="skills-category">
+                    <span class="keyword">专业知识</span>:
+                    <div class="skills-list">
+                        <ul>
+                            <li>熟悉基本数据结构和算法，能够设计高效的安全分析算法</li>
+                            <li>熟悉恶意程序分析与软件加壳脱壳方法，能够处理各类混淆和加密技术</li>
+                            <li>了解栈溢出、格式化字符串等常见的二进制漏洞利用技术</li>
+                            <li>熟悉Web安全漏洞（如SQL注入、XSS、XXE等）的原理与防护</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="skills-item">
+                <div class="skills-category">
+                    <span class="keyword">安全工具</span>:
+                    <div class="skills-list">
+                        <ul>
+                            <li>熟练使用OllyDbg、IDA等逆向分析工具进行恶意代码分析</li>
+                            <li>精通Metasploit、BurpSuite、Nmap等网络攻防工具</li>
+                            <li>熟悉开源恶意软件分析工具CAPA、CAPE、Cuckoo的技术机理</li>
+                            <li>能够搭建和配置安全分析环境，包括沙箱和隔离测试环境</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="skills-item">
+                <div class="skills-category">
+                    <span class="keyword">AI技能</span>:
+                    <div class="skills-list">
+                        <ul>
+                            <li>具有八年人工智能和自然语言处理的编程经验</li>
+                            <li>熟练使用Keras、TensorFlow等深度学习框架</li>
+                            <li>基本掌握各深度学习模型和机器学习算法，能够应用于安全威胁检测</li>
+                            <li>能够设计和实现基于AI的安全分析系统，提高检测效率和准确率</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
