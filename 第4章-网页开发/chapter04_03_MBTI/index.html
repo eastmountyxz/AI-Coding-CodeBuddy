@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI Personality Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="intro-section" class="section active">
+            <h1>MBTI Personality Test</h1>
+            <p>This test consists of 20 questions that will help determine your MBTI personality type.</p>
+            <p>For each question, select the option that best describes you.</p>
+            <button id="start-btn" class="btn">Start Test</button>
+        </div>
+
+        <div id="question-section" class="section">
+            <div class="progress-bar">
+                <div id="progress"></div>
+            </div>
+            <div id="question-counter">Question 1 of 20</div>
+            <h2 id="question-text"></h2>
+            <div class="options">
+                <button id="option-a" class="option-btn"></button>
+                <button id="option-b" class="option-btn"></button>
+            </div>
+            <div class="navigation">
+                <button id="prev-btn" class="nav-btn">Previous</button>
+                <button id="next-btn" class="nav-btn">Next</button>
+            </div>
+        </div>
+
+        <div id="results-section" class="section">
+            <h1>Your MBTI Type</h1>
+            <div id="mbti-type" class="mbti-result"></div>
+            <div class="result-description">
+                <p id="type-description"></p>
+            </div>
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <h3>Extraversion (E) vs Introversion (I)</h3>
+                    <div class="chart">
+                        <div id="e-bar" class="bar e-bar"><span id="e-score">0</span></div>
+                        <div id="i-bar" class="bar i-bar"><span id="i-score">0</span></div>
+                    </div>
+                    <div class="labels">
+                        <span>E</span>
+                        <span>I</span>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3>Sensing (S) vs Intuition (N)</h3>
+                    <div class="chart">
+                        <div id="s-bar" class="bar s-bar"><span id="s-score">0</span></div>
+                        <div id="n-bar" class="bar n-bar"><span id="n-score">0</span></div>
+                    </div>
+                    <div class="labels">
+                        <span>S</span>
+                        <span>N</span>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3>Thinking (T) vs Feeling (F)</h3>
+                    <div class="chart">
+                        <div id="t-bar" class="bar t-bar"><span id="t-score">0</span></div>
+                        <div id="f-bar" class="bar f-bar"><span id="f-score">0</span></div>
+                    </div>
+                    <div class="labels">
+                        <span>T</span>
+                        <span>F</span>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3>Judging (J) vs Perceiving (P)</h3>
+                    <div class="chart">
+                        <div id="j-bar" class="bar j-bar"><span id="j-score">0</span></div>
+                        <div id="p-bar" class="bar p-bar"><span id="p-score">0</span></div>
+                    </div>
+                    <div class="labels">
+                        <span>J</span>
+                        <span>P</span>
+                    </div>
+                </div>
+            </div>
+            <button id="restart-btn" class="btn">Take Test Again</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
