@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贵州旅游网 - 发现多彩贵州</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>多彩贵州</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#attractions" class="nav-link">景点推荐</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#guide" class="nav-link">旅游攻略</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#form" class="nav-link">表单提交</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主页面 -->
+    <main>
+        <!-- 首页轮播区 -->
+        <section id="home" class="hero-section">
+            <div class="hero-carousel swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="hero-content">
+                            <h1>黄果树瀑布</h1>
+                            <p>中国最大的瀑布群，气势磅礴的自然奇观</p>
+                            <button class="hero-btn">查看详情</button>
+                        </div>
+                        <div class="hero-image" id="hero-image-1"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="hero-content">
+                            <h1>西江千户苗寨</h1>
+                            <p>世界最大的苗族聚居村寨，体验原生态民族文化</p>
+                            <button class="hero-btn">查看详情</button>
+                        </div>
+                        <div class="hero-image" id="hero-image-2"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="hero-content">
+                            <h1>梵净山</h1>
+                            <p>世界自然遗产，佛教名山的神秘魅力</p>
+                            <button class="hero-btn">查看详情</button>
+                        </div>
+                        <div class="hero-image" id="hero-image-3"></div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <!-- 动态图片搜索区 -->
+        <section class="image-search-section">
+            <div class="container">
+                <h2>发现贵州美景</h2>
+                <div class="search-container">
+                    <input type="text" id="image-search" placeholder="输入景点名称搜索图片（如：梵净山、荔波小七孔）">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="search-suggestions" id="search-suggestions"></div>
+                <div class="image-gallery" id="image-gallery">
+                    <div class="loading" id="loading">正在加载图片...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 景点推荐区 -->
+        <section id="attractions" class="attractions-section">
+            <div class="container">
+                <h2>热门景点推荐</h2>
+                <div class="attractions-carousel swiper">
+                    <div class="swiper-wrapper" id="attractions-wrapper">
+                        <!-- 景点卡片将通过JavaScript动态生成 -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 旅游攻略区 -->
+        <section id="guide" class="guide-section">
+            <div class="container">
+                <h2>旅游攻略</h2>
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h3>最佳旅游时间</h3>
+                        <p>贵州四季如春，3-10月是最佳旅游季节，气候宜人，景色优美。</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3>交通指南</h3>
+                        <p>贵阳龙洞堡机场是主要入口，高铁网络发达，省内景点间交通便利。</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3>美食推荐</h3>
+                        <p>酸汤鱼、丝娃娃、肠旺面等特色美食，体验地道贵州风味。</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3>住宿建议</h3>
+                        <p>从豪华酒店到特色民宿，多样化住宿选择满足不同需求。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 表单提交区 -->
+        <section id="form" class="form-section">
+            <div class="container">
+                <div class="form-grid">
+                    <div class="form-container">
+                        <h2>旅游咨询表单</h2>
+                        <form id="tourism-form">
+                            <div class="form-group">
+                                <label for="name">姓名 *</label>
+                                <input type="text" id="name" name="name" required>
+                                <span class="error-message" id="name-error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">邮箱 *</label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="error-message" id="email-error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">意向景点 *</label>
+                                <select id="destination" name="destination" required>
+                                    <option value="">请选择景点</option>
+                                    <option value="黄果树瀑布">黄果树瀑布</option>
+                                    <option value="西江千户苗寨">西江千户苗寨</option>
+                                    <option value="梵净山">梵净山</option>
+                                    <option value="遵义会址">遵义会址</option>
+                                    <option value="荔波小七孔">荔波小七孔</option>
+                                    <option value="镇远古镇">镇远古镇</option>
+                                </select>
+                                <span class="error-message" id="destination-error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="travel-date">出行日期 *</label>
+                                <input type="date" id="travel-date" name="travel-date" required>
+                                <span class="error-message" id="date-error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="requirements">需求说明</label>
+                                <textarea id="requirements" name="requirements" rows="4" placeholder="请描述您的具体需求和期望..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <span class="btn-text">提交咨询</span>
+                                <span class="btn-loading">提交中...</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="consultation-sidebar">
+                        <h3>最新咨询</h3>
+                        <div id="recent-consultations">
+                            <p class="no-consultations">暂无咨询记录</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 成功提示弹窗 -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h3>提交成功</h3>
+            </div>
+            <div class="modal-body">
+                <p>您的旅游咨询已成功提交，我们将尽快与您联系！</p>
+            </div>
+            <button class="modal-close" id="modal-close">确定</button>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 多彩贵州旅游网. 版权所有</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
