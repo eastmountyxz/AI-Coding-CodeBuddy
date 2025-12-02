@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>热点风云榜测试</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .ranking-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px 30px;
+            min-height: 400px;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ranking-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e8e8e8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ranking-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .item-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #000000;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .item-rank {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin-left: 15px;
+        }
+
+        .rank-1 { background: #ff4757; }
+        .rank-2 { background: #ff9f43; }
+        .rank-3 { background: #ffd32c; }
+        .rank-default { background: #95a5a6; }
+
+        .item-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .meta-small {
+            font-size: 12px;
+            color: #888888;
+        }
+
+        .hot-indicator {
+            color: #1890ff;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .trend-up {
+            color: #2ecc71;
+            font-weight: 600;
+        }
+
+        .trend-down {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .keywords {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .keyword-tag {
+            background: #e8f4fd;
+            color: #1890ff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px 30px;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>热点风云榜</h1>
+            <button class="refresh-btn" onclick="refreshData()">🔄 刷新数据</button>
+        </header>
+
+        <main class="ranking-section">
+            <div id="ranking-list" class="ranking-list">
+                <!-- 数据将在这里显示 -->
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div>数据更新时间：<span id="update-time">--</span></div>
+        </footer>
+    </div>
+
+    <script>
+        // 热点数据数组
+        const hotData = [
+            {
+                id: 1,
+                title: "人工智能新突破",
+                domain: "科技",
+                publishTime: "3小时前",
+                hotness: "1.2万",
+                comments: 845,
+                keywords: ["人工智能", "科技前沿", "OpenAI"],
+                trendChange: "↑ 1245"
+            },
+            {
+                id: 2,
+                title: "世界杯预选赛",
+                domain: "体育",
+                publishTime: "5小时前",
+                hotness: "9800",
+                comments: 1203,
+                keywords: ["足球", "世界杯", "体育"],
+                trendChange: "↑ 987"
+            },
+            {
+                id: 3,
+                title: "新能源车市场",
+                domain: "财经",
+                publishTime: "2小时前",
+                hotness: "8500",
+                comments: 632,
+                keywords: ["新能源汽车", "政策", "财经"],
+                trendChange: "↑ 756"
+            },
+            {
+                id: 4,
+                title: "票房破纪录",
+                domain: "娱乐",
+                publishTime: "8小时前",
+                hotness: "7200",
+                comments: 1542,
+                keywords: ["电影", "娱乐", "票房"],
+                trendChange: "↓ 324"
+            },
+            {
+                id: 5,
+                title: "科学家发现新材料",
+                domain: "科技",
+                publishTime: "6小时前",
+                hotness: "6800",
+                comments: 478,
+                keywords: ["材料", "科学突破", "能源"],
+                trendChange: "↑ 621"
+            },
+            {
+                id: 6,
+                title: "全球气候峰会",
+                domain: "国际",
+                publishTime: "12小时前",
+                hotness: "5400",
+                comments: 892,
+                keywords: ["气候变化", "国际", "环保"],
+                trendChange: "↓ 215"
+            }
+        ];
+
+        let currentData = [...hotData];
+
+        // 页面加载完成后初始化
+        $(document).ready(function() {
+            console.log("页面加载完成，开始渲染数据");
+            console.log("数据数量:", currentData.length);
+            renderData(currentData);
+            updateTime();
+        });
+
+        // 获取排名样式类
+        function getRankClass(rank) {
+            switch(rank) {
+                case 1: return 'rank-1';
+                case 2: return 'rank-2';
+                case 3: return 'rank-3';
+                default: return 'rank-default';
+            }
+        }
+
+        // 判断趋势样式
+        function getTrendClass(trendChange) {
+            return trendChange.includes('↑') ? 'trend-up' : 'trend-down';
+        }
+
+        // 渲染数据
+        function renderData(data) {
+            console.log("开始渲染数据，数据长度:", data.length);
+            const $list = $('#ranking-list');
+            
+            $list.empty();
+            
+            data.forEach((item, index) => {
+                console.log(`渲染第${index + 1}条数据:`, item.title);
+                const rank = index + 1;
+                const rankClass = getRankClass(rank);
+                const trendClass = getTrendClass(item.trendChange);
+                
+                const $item = $(`
+                    <div class="ranking-item" onclick="showDetail(${item.id})">
+                        <div class="item-header">
+                            <h3 class="item-title">${item.title}</h3>
+                            <div class="item-rank ${rankClass}">${rank}</div>
+                        </div>
+                        <div class="item-meta">
+                            <span class="meta-item">🏷️ ${item.domain}</span>
+                            <span class="meta-item meta-small">⏰ ${item.publishTime}</span>
+                            <span class="meta-item hot-indicator">🔥 ${item.hotness}</span>
+                            <span class="meta-item meta-small">💬 ${item.comments}</span>
+                            <span class="meta-item ${trendClass}">
+                                ${item.trendChange}
+                            </span>
+                        </div>
+                        <div class="keywords">
+                            ${item.keywords.map(keyword => `<span class="keyword-tag">${keyword}</span>`).join('')}
+                        </div>
+                    </div>
+                `);
+                $list.append($item);
+            });
+            
+            console.log("数据渲染完成");
+        }
+
+        // 显示详情
+        function showDetail(id) {
+            const item = currentData.find(data => data.id === id);
+            if (item) {
+                alert(`新闻详情：\n${item.title}\n领域：${item.domain}\n热度：${item.hotness}\n评论：${item.comments}`);
+            }
+        }
+
+        // 刷新数据
+        function refreshData() {
+            const $list = $('#ranking-list');
+            $list.html('<div style="text-align: center; padding: 40px;">🔄 正在刷新数据...</div>');
+            
+            setTimeout(function() {
+                renderData(currentData);
+                updateTime();
+                alert('数据刷新成功！');
+            }, 1000);
+        }
+
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            $('#update-time').text(timeString);
+        }
+    </script>
+</body>
+</html>
