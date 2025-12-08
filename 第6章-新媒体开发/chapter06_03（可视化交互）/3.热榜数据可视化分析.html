@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>热榜数据可视化分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+        
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .chart-wrapper {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            position: relative;
+        }
+        
+        .description {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .description h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .description p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
+        .example {
+            background-color: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .scenario-list {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+        
+        .scenario-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .scenario-list li:before {
+            content: "•";
+            color: #3498db;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 3px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>热榜数据可视化分析</h1>
+            <p class="subtitle">通过折线图、柱状图和饼图直观展示热榜趋势、对比和构成，为内容运营提供决策依据</p>
+        </header>
+        
+        <section class="section">
+            <h2><span class="icon">1</span>折线图：追踪"热榜热度趋势"</h2>
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="trendChart"></canvas>
+                </div>
+                <div class="description">
+                    <h3>预判内容生命周期</h3>
+                    <p>展示数据随时间的变化规律，直观呈现热榜内容"起量、峰值、衰减"的生命周期，或营销活动的"引流趋势"。</p>
+                    
+                    <div class="example">
+                        <div class="example-title">典型应用场景：</div>
+                        <ul class="scenario-list">
+                            <li>热榜单条内容7日点击量变化</li>
+                            <li>营销活动每日引流人数波动</li>
+                            <li>公众号热文阅读量增长曲线</li>
+                        </ul>
+                    </div>
+                    
+                    <p>例如，通过折线图可发现"热榜内容发布后24小时达峰值，48小时后开始衰减"，为运营者制定"峰值加推"策略提供依据。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><span class="icon">2</span>柱状图：对比"多维度数据"</h2>
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <div class="description">
+                    <h3>定位核心优势</h3>
+                    <p>对比不同类别数据的数值大小，快速判断"哪些内容更受欢迎、哪些渠道更高效"。</p>
+                    
+                    <div class="example">
+                        <div class="example-title">典型应用场景：</div>
+                        <ul class="scenario-list">
+                            <li>热榜不同分类点击量对比（科技vs娱乐vs体育）</li>
+                            <li>营销多渠道引流效果对比（抖音vs小红书vs视频号）</li>
+                            <li>不同热榜标题样式的点击率对比</li>
+                        </ul>
+                    </div>
+                    
+                    <p>例如，柱状图可直观显示"科技类热榜点击量是娱乐类的1.5倍"，为内容选题提供方向。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><span class="icon">3</span>饼图：分析"热榜构成占比"</h2>
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="compositionChart"></canvas>
+                </div>
+                <div class="description">
+                    <h3>明确内容定位</h3>
+                    <p>展示整体数据中各部分的占比，明确热榜内容构成、营销用户来源等核心结构。</p>
+                    
+                    <div class="example">
+                        <div class="example-title">典型应用场景：</div>
+                        <ul class="scenario-list">
+                            <li>热榜内容分类占比（科技30%+娱乐25%+体育20%+其他25%）</li>
+                            <li>营销引流用户来源占比（热榜推荐50%+搜索30%+分享20%）</li>
+                            <li>热榜爆款内容标签占比</li>
+                        </ul>
+                    </div>
+                    
+                    <p>例如，饼图可快速定位"科技类是热榜核心内容"，为内容创作提供重心。</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>热榜数据可视化分析 &copy; 2023 | 数据驱动决策，优化内容策略</p>
+        </footer>
+    </div>
+
+    <script>
+        // 折线图 - 热榜热度趋势
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        const trendChart = new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ['发布日', '第1天', '第2天', '第3天', '第4天', '第5天', '第6天'],
+                datasets: [{
+                    label: '热榜内容点击量(万)',
+                    data: [3, 15, 25, 18, 12, 8, 5],
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3,
+                    pointBackgroundColor: '#3498db',
+                    pointRadius: 5,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '热榜内容7日点击趋势',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '点击量(万)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '发布时间'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 柱状图 - 多维度数据对比
+        const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+        const comparisonChart = new Chart(comparisonCtx, {
+            type: 'bar',
+            data: {
+                labels: ['科技', '娱乐', '体育', '财经', '生活', '国际'],
+                datasets: [{
+                    label: '点击量(万)',
+                    data: [45, 30, 25, 22, 18, 15],
+                    backgroundColor: [
+                        'rgba(52, 152, 219, 0.7)',
+                        'rgba(155, 89, 182, 0.7)',
+                        'rgba(46, 204, 113, 0.7)',
+                        'rgba(241, 196, 15, 0.7)',
+                        'rgba(230, 126, 34, 0.7)',
+                        'rgba(231, 76, 60, 0.7)'
+                    ],
+                    borderColor: [
+                        '#3498db',
+                        '#9b59b6',
+                        '#2ecc71',
+                        '#f1c40f',
+                        '#e67e22',
+                        '#e74c3c'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '热榜各分类点击量对比',
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '点击量(万)'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 饼图 - 热榜构成占比
+        const compositionCtx = document.getElementById('compositionChart').getContext('2d');
+        const compositionChart = new Chart(compositionCtx, {
+            type: 'pie',
+            data: {
+                labels: ['科技', '娱乐', '体育', '财经', '生活', '其他'],
+                datasets: [{
+                    data: [30, 25, 20, 12, 8, 5],
+                    backgroundColor: [
+                        '#3498db',
+                        '#9b59b6',
+                        '#2ecc71',
+                        '#f1c40f',
+                        '#e67e22',
+                        '#e74c3c'
+                    ],
+                    borderWidth: 1,
+                    hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '热榜内容分类占比',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        position: 'right'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
