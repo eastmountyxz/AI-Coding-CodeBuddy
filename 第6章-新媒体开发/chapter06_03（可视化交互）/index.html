@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技热榜 - 数据洞察</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1E40AF;
+            --secondary-color: #f5f5f5;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --gradient-bg: linear-gradient(135deg, #1E40AF 0%, #3b82f6 100%);
+        }
+
+        body {
+            font-family: "微软雅黑", "Microsoft YaHei", Arial, sans-serif;
+            background: var(--secondary-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 100px;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .last-update {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Hot List Section */
+        .hot-list-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .hot-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hot-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #EEEEEE;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: white;
+        }
+
+        .hot-item:hover {
+            background-color: #f5f5f5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* 排名样式 */
+        .rank-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .rank-number.top1 { background-color: #CC0000; }
+        .rank-number.top2 { background-color: #FF9900; }
+        .rank-number.top3 { background-color: #FF9900; }
+        .rank-number.top4 { background-color: #CCCCCC; }
+        .rank-number.top5 { background-color: #CCCCCC; }
+
+        /* 中间图文区 */
+        .item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-title {
+            font-family: "微软雅黑", Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .item-title:hover {
+            color: #1E40AF;
+        }
+
+        .tags {
+            display: inline-flex;
+            gap: 5px;
+            margin-left: 5px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-family: "微软雅黑", Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .tag.hot {
+            background-color: #CC0000;
+            color: white;
+        }
+
+        .tag.new {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        .tag.trending {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        .tag.recommended {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        .item-summary {
+            font-family: "微软雅黑", Arial, sans-serif;
+            font-size: 16px;
+            color: #666666;
+            line-height: 1.5;
+            margin: 10px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .item-image {
+            width: 150px;
+            height: 100px;
+            border-radius: 4px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        /* 右侧数据区 */
+        .item-stats {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "微软雅黑", Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .clicks-stat {
+            color: #1E40AF;
+        }
+
+        .conversions-stat {
+            color: #009933;
+        }
+
+        .separator {
+            color: #666666;
+            font-weight: normal;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #EEEEEE;
+        }
+
+        .chart-title {
+            font-family: "微软雅黑", Arial, sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            background: white;
+            border: 1px solid #EEEEEE;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        /* 加载动画效果 */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hot-item {
+            opacity: 0;
+            animation: slideInLeft 0.5s ease-out forwards;
+        }
+
+        .hot-item:nth-child(1) { animation-delay: 0.1s; }
+        .hot-item:nth-child(2) { animation-delay: 0.2s; }
+        .hot-item:nth-child(3) { animation-delay: 0.3s; }
+        .hot-item:nth-child(4) { animation-delay: 0.4s; }
+        .hot-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .chart-container {
+            opacity: 0;
+            animation: slideInUp 0.5s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            background-color: #1E40AF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #1e3a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .back-to-top::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 12px solid white;
+            transform: translateY(-2px);
+        }
+
+        /* 数据说明 */
+        .data-note {
+            font-family: "微软雅黑", "Microsoft YaHei", Arial, sans-serif;
+            font-size: 12px;
+            color: #999999;
+            text-align: left;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #EEEEEE;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .hot-item {
+                flex-direction: column;
+                padding: 12px;
+                gap: 10px;
+            }
+
+            .rank-number {
+                align-self: flex-start;
+                margin-top: 0;
+            }
+
+            .item-title {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            .tags {
+                margin-bottom: 8px;
+            }
+
+            .tag {
+                font-size: 10px;
+                padding: 1px 6px;
+            }
+
+            .item-summary {
+                font-size: 14px;
+                margin: 5px 0;
+            }
+
+            .item-image {
+                width: 100%;
+                height: 120px;
+            }
+
+            .item-stats {
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 8px;
+                font-size: 12px;
+            }
+
+            .chart-title {
+                font-size: 16px;
+            }
+
+            .chart-container {
+                height: 300px;
+                padding: 10px;
+            }
+
+            .hot-list-section, .chart-section {
+                padding: 1rem;
+            }
+
+            .data-note {
+                font-size: 11px;
+            }
+
+            /* 移动端回到顶部按钮调整 */
+            .back-to-top {
+                bottom: 30px;
+                right: 20px;
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 0;
+            }
+
+            .header-content {
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hot-item {
+                padding: 10px;
+            }
+
+            .item-title {
+                font-size: 14px;
+            }
+
+            .item-summary {
+                font-size: 13px;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+
+            .chart-title {
+                font-size: 14px;
+            }
+
+            .data-note {
+                font-size: 10px;
+                margin-top: 10px;
+            }
+
+            /* 移动端回到顶部按钮进一步调整 */
+            .back-to-top {
+                bottom: 20px;
+                right: 15px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .back-to-top::before {
+                border-left-width: 6px;
+                border-right-width: 6px;
+                border-bottom-width: 10px;
+            }
+        }
+
+        /* 小屏幕设备优化 */
+        @media (max-width: 320px) {
+            .container {
+                padding: 0 15px; /* 保持15px边距 */
+            }
+
+            .hot-item {
+                padding: 8px;
+            }
+
+            .item-image {
+                height: 100px;
+            }
+        }
+
+        /* 大屏幕优化 - 确保内容居中 */
+        @media (min-width: 1400px) {
+            .container {
+                padding: 0 100px; /* 保持100px边距 */
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>
+                    🔥 科技热榜
+                </h1>
+                <div class="last-update" id="lastUpdate">最后更新：加载中...</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- 热榜展示区 -->
+            <section class="hot-list-section">
+                <h2 class="section-title">📊 热榜爆款内容</h2>
+                <div class="hot-list" id="hotList">
+                    <!-- 动态生成热榜内容 -->
+                </div>
+            </section>
+
+            <!-- 营销可视化统计区 -->
+            <section class="chart-section">
+                <div class="chart-title">科技热榜内容点击与转化数据</div>
+                <div class="chart-container">
+                    <canvas id="statsChart"></canvas>
+                </div>
+                <div class="data-note">数据更新时间：2025-11-24 | 转化量指点击后跳转至详情页的用户数</div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="backToTop"></div>
+
+    <script>
+        // 模拟热榜数据
+        const hotData = [
+            {
+                rank: 1,
+                title: "AI情感交互机器人实现突破",
+                tags: ["10万+"],
+                summary: "国内团队研发的AI机器人可识别用户情绪，回应准确率达92%，适用于客服场景",
+                image: "https://picsum.photos/seed/ai-robot-emotion/150/100.jpg",
+                clicks: 125000,
+                conversions: 3200
+            },
+            {
+                rank: 2,
+                title: "国产芯片制程突破2nm",
+                tags: ["新上榜"],
+                summary: "某科技企业宣布成功量产2nm芯片，性能较上一代提升40%，成本降低25%",
+                image: "https://picsum.photos/seed/chip-2nm/150/100.jpg",
+                clicks: 98000,
+                conversions: 2800
+            },
+            {
+                rank: 3,
+                title: "太空舱民宿正式开业",
+                tags: ["热搜"],
+                summary: "国内首个太空主题民宿落地青海，采用智能控制系统，定价1999元/晚",
+                image: "https://picsum.photos/seed/space-capsule-hotel/150/100.jpg",
+                clicks: 83000,
+                conversions: 1500
+            },
+            {
+                rank: 4,
+                title: "新能源汽车续航破1500公里",
+                tags: ["热议"],
+                summary: "某车企发布新款电动车，搭载固态电池，续航里程达1520公里，充电10分钟可跑500公里",
+                image: "https://picsum.photos/seed/electric-car-1500km/150/100.jpg",
+                clicks: 76000,
+                conversions: 2100
+            },
+            {
+                rank: 5,
+                title: "元宇宙办公平台上线",
+                tags: ["推荐"],
+                summary: "支持100人同时在线元宇宙办公，虚拟形象可实时互动，文件传输速度提升3倍",
+                image: "https://picsum.photos/seed/metaverse-office/150/100.jpg",
+                clicks: 62000,
+                conversions: 1800
+            }
+        ];
+
+        // 格式化数字
+        function formatNumber(num) {
+            if (num >= 10000) {
+                return (num / 10000).toFixed(1) + '万';
+            }
+            return num.toLocaleString();
+        }
+
+        // 获取标签样式
+        function getTagClass(tag) {
+            if (tag.includes('10万+')) return 'hot';
+            if (tag.includes('新上榜')) return 'new';
+            if (tag.includes('热搜') || tag.includes('热议')) return 'trending';
+            if (tag.includes('推荐')) return 'recommended';
+            return 'trending';
+        }
+
+        // 生成热榜HTML
+        function generateHotList() {
+            const hotListEl = document.getElementById('hotList');
+            
+            const hotListHTML = hotData.map(item => {
+                const clicksText = (item.clicks >= 10000) ? (item.clicks / 10000).toFixed(1) + '万' : item.clicks.toLocaleString();
+                const conversionsText = item.conversions.toLocaleString();
+                
+                return `
+                    <div class="hot-item">
+                        <div class="rank-number top${item.rank}">${item.rank}</div>
+                        <div class="item-content">
+                            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
+                                <a href="#" class="item-title" onclick="handleItemClick(${item.rank}); return false;">${item.title}</a>
+                                <div class="tags">
+                                    ${item.tags.map(tag => `<span class="tag ${getTagClass(tag)}">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="item-summary">${item.summary}</div>
+                        </div>
+                        <img src="${item.image}" alt="${item.title}" class="item-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDE1MCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjVGNUY1Ii8+Cjx0ZXh0IHg9Ijc1IiB5PSI1NSIgZm9udC1mYW1pbHk9Ik1pY3Jvc29mdCBZYWhlaSIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OTk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+5Zu+54mH5Li65paH5Lu2PC90ZXh0Pgo8L3N2Zz4K'">
+                        <div class="item-stats">
+                            <span class="clicks-stat">${clicksText}</span>
+                            <span class="separator">/</span>
+                            <span class="conversions-stat">${conversionsText}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            hotListEl.innerHTML = hotListHTML;
+        }
+
+        // 创建图表
+        function createChart() {
+            const ctx = document.getElementById('statsChart').getContext('2d');
+            
+            const labels = hotData.map(item => item.title);
+            const clicksData = hotData.map(item => item.clicks);
+            const conversionsData = hotData.map(item => item.conversions);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '点击量',
+                            data: clicksData,
+                            backgroundColor: '#1E40AF',
+                            borderColor: '#1E40AF',
+                            borderWidth: 1,
+                            yAxisID: 'y',
+                            borderRadius: 3,
+                            order: 2
+                        },
+                        {
+                            label: '转化量',
+                            data: conversionsData,
+                            backgroundColor: '#009933',
+                            borderColor: '#009933',
+                            borderWidth: 1,
+                            yAxisID: 'y1',
+                            borderRadius: 3,
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: '微软雅黑'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const index = context[0].dataIndex;
+                                    return labels[index];
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += formatNumber(context.parsed.y);
+                                    if (context.datasetIndex === 1) {
+                                        const clickValue = clicksData[context.dataIndex];
+                                        const conversionRate = ((context.parsed.y / clickValue) * 100).toFixed(1);
+                                        label += ` (${conversionRate}% 转化率)`;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    family: '微软雅黑',
+                                    size: 12
+                                },
+                                color: '#666666',
+                                autoSkip: false,
+                                maxRotation: 45,
+                                minRotation: 0
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '点击量 (万)',
+                                color: '#1E40AF',
+                                font: {
+                                    family: '微软雅黑',
+                                    size: 14
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    family: '微软雅黑'
+                                },
+                                color: '#1E40AF',
+                                callback: function(value) {
+                                    return (value / 10000).toFixed(1);
+                                }
+                            },
+                            grid: {
+                                color: '#EEEEEE'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '转化量 (千)',
+                                color: '#009933',
+                                font: {
+                                    family: '微软雅黑',
+                                    size: 14
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    family: '微软雅黑'
+                                },
+                                color: '#009933',
+                                callback: function(value) {
+                                    return (value / 1000).toFixed(1);
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                                color: '#EEEEEE'
+                            },
+                        }
+                    }
+                }
+            });
+        }
+
+        // 处理项目点击
+        function handleItemClick(rank) {
+            console.log(`点击了TOP${rank}内容`);
+            // 链接暂用"#"替代，实际使用时可以跳转到具体的热文详情页
+            // window.location.href = `/article/detail/${rank}`;
+        }
+
+        // 更新最后更新时间
+        function updateLastUpdateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('lastUpdate').textContent = `最后更新：${timeString}`;
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            generateHotList();
+            createChart();
+            updateLastUpdateTime();
+        });
+
+        // 自动刷新数据（可选）
+        setInterval(updateLastUpdateTime, 60000); // 每分钟更新时间
+
+        // 回到顶部功能
+        function initBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercentage = (scrollPosition / documentHeight) * 100;
+                
+                // 滚动到页面中间位置时显示按钮
+                if (scrollPercentage > 20) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // 点击回到顶部
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // 页面加载完成后初始化所有功能
+        document.addEventListener('DOMContentLoaded', function() {
+            generateHotList();
+            createChart();
+            updateLastUpdateTime();
+            initBackToTop();
+        });
+    </script>
+</body>
+</html>
