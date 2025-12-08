@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技热榜 - 人工智能新突破</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .tech-hot-list {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .hot-item {
+            padding: 24px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .hot-item:last-child {
+            border-bottom: none;
+        }
+        
+        .primary-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        
+        .title {
+            flex: 1;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #333333;
+            margin-right: 12px;
+            font-family: "SimHei", "Microsoft YaHei", sans-serif;
+        }
+        
+        .hot-tag {
+            background-color: #ff3a30;
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        
+        .featured-image {
+            width: 80%;
+            margin: 0 auto 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .secondary-info {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666666;
+            margin-bottom: 12px;
+        }
+        
+        .tertiary-info {
+            font-size: 12px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+        }
+        
+        .divider {
+            margin: 0 8px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-top: 20px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .section-subtitle {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-hot-list">
+        <div class="section-header">
+            <h1 class="section-title">科技热榜</h1>
+            <p class="section-subtitle">每日最新科技资讯与趋势</p>
+        </div>
+        
+        <div class="hot-item">
+            <div class="primary-info">
+                <h2 class="title">AI对话机器人实现情感交互</h2>
+                <span class="hot-tag">热搜TOP3</span>
+            </div>
+            
+            <div class="featured-image">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="AI交互界面截图">
+            </div>
+            
+            <p class="secondary-info">
+                国内团队研发的AI机器人可识别用户情绪，回应准确率达92%，适用于客服场景
+            </p>
+            
+            <div class="tertiary-info">
+                <span>2025-11-24</span>
+                <span class="divider">|</span>
+                <span>浏览量12.5万</span>
+            </div>
+        </div>
+        
+        <!-- 其他热榜项示例 -->
+        <div class="hot-item">
+            <div class="primary-info">
+                <h2 class="title">量子计算机实现千公里级量子纠缠</h2>
+                <span class="hot-tag">热搜TOP4</span>
+            </div>
+            
+            <div class="featured-image">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="量子计算机示意图">
+            </div>
+            
+            <p class="secondary-info">
+                中国科学家成功实现千公里级量子纠缠分发，为构建全球量子通信网络奠定基础
+            </p>
+            
+            <div class="tertiary-info">
+                <span>2025-11-23</span>
+                <span class="divider">|</span>
+                <span>浏览量10.2万</span>
+            </div>
+        </div>
+        
+        <div class="hot-item">
+            <div class="primary-info">
+                <h2 class="title">脑机接口技术取得重大突破</h2>
+                <span class="hot-tag">热搜TOP5</span>
+            </div>
+            
+            <div class="featured-image">
+                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="脑机接口示意图">
+            </div>
+            
+            <p class="secondary-info">
+                新型非侵入式脑机接口实现意念控制机械臂，准确率高达95%，为残障人士带来希望
+            </p>
+            
+            <div class="tertiary-info">
+                <span>2025-11-22</span>
+                <span class="divider">|</span>
+                <span>浏览量9.8万</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
