@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XX品牌川味回锅肉自热米饭 - 宿舍党必备神器</title>
+    
+    <!-- ========== 头部样式引入 ========== -->
+    <style>
+        /* ====== 全局重置与基础样式 ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 使用 !important 确保样式优先级，避免与电商页面冲突 */
+        .dormitory-hot-rice-container * {
+            font-family: '微软雅黑', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif !important;
+            color: #333333 !important;
+            line-height: 1.6 !important;
+        }
+        
+        /* ====== 容器布局规范 ====== */
+        .dormitory-hot-rice-container {
+            width: 100%; /* 手机端宽度100% */
+            max-width: 1000px; /* 电脑端最大宽度1000px */
+            margin: 0 auto; /* 居中显示 */
+            padding: 0 15px; /* 手机端左右各留15px空白 */
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        /* 电脑端布局调整 */
+        @media (min-width: 1200px) {
+            .dormitory-hot-rice-container {
+                padding: 0 200px; /* 电脑端左右各留200px空白 */
+            }
+        }
+        
+        /* ====== 加载动画效果 ====== */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 图片淡入效果 */
+        .image-fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .image-fade-in.loaded {
+            opacity: 1;
+        }
+        
+        /* ====== 热榜引流标识 ====== */
+        .hot-badge {
+            background: linear-gradient(45deg, #ff3838, #ff6b6b) !important;
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 20px !important;
+            font-weight: bold !important;
+            display: inline-block !important;
+            margin: 20px 0 !important;
+            font-size: 1.1em !important;
+            animation: pulse 2s infinite !important;
+            box-shadow: 0 4px 15px rgba(255,56,56,0.4) !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        /* ====== 产品标题样式 ====== */
+        .product-title {
+            font-size: 24px !important;
+            font-weight: bold !important;
+            color: #FF9933 !important;
+            margin-bottom: 20px !important;
+            text-align: center !important;
+        }
+        
+        /* ====== 美食内容区块 - 上图下文布局 ====== */
+        .food-content-block {
+            margin-bottom: 20px !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+            background: white !important;
+            transition: transform 0.3s ease !important;
+        }
+        
+        .food-content-block:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        }
+        
+        /* ====== 图片容器样式 ====== */
+        .image-container {
+            width: 100% !important;
+            position: relative !important;
+            background: #FFF5EB !important;
+            min-height: 300px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: hidden !important;
+        }
+        
+        .image-placeholder {
+            text-align: center !important;
+            color: #FF9933 !important;
+            font-size: 2em !important;
+        }
+        
+        .product-image {
+            width: 100% !important;
+            height: auto !important;
+            display: block !important;
+            filter: brightness(1.05) saturate(1.1) !important;
+            transition: transform 0.3s ease !important;
+            cursor: pointer !important;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.02) !important;
+        }
+        
+        /* ====== 文字内容区域 ====== */
+        .text-content {
+            padding: 20px !important;
+        }
+        
+        .content-title {
+            font-size: 18px !important;
+            font-weight: bold !important;
+            color: #FF9933 !important;
+            margin-bottom: 15px !important;
+        }
+        
+        .content-body {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            color: #333333 !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .content-body strong {
+            text-decoration: underline !important;
+            font-weight: bold !important;
+            color: #FF6600 !important;
+        }
+        
+        /* ====== 行动指引按钮 ====== */
+        .action-button {
+            display: inline-block !important;
+            font-size: 16px !important;
+            color: white !important;
+            background: #FF9933 !important;
+            padding: 8px 16px !important;
+            border-radius: 4px !important;
+            text-align: center !important;
+            cursor: pointer !important;
+            transition: background-color 0.3s ease !important;
+            text-decoration: none !important;
+            margin: 10px 5px !important;
+            border: none !important;
+            box-shadow: 0 2px 4px rgba(255,153,51,0.3) !important;
+        }
+        
+        .action-button:hover {
+            background: #FF6600 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 8px rgba(255,102,0,0.4) !important;
+        }
+        
+        .action-button:active {
+            transform: translateY(0) !important;
+        }
+        
+        /* ====== 数据可视化图表 ====== */
+        .chart-section {
+            margin: 40px 0 !important;
+            padding: 30px !important;
+            background: white !important;
+            border: 2px solid #FFF5EB !important;
+            border-radius: 8px !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        }
+        
+        .chart-title {
+            font-size: 18px !important;
+            font-weight: bold !important;
+            color: #FF9933 !important;
+            text-align: center !important;
+            margin-bottom: 30px !important;
+        }
+        
+        .chart-container {
+            position: relative !important;
+            height: 300px !important;
+            background: white !important;
+            padding: 20px !important;
+        }
+        
+        .bar-chart {
+            display: flex !important;
+            align-items: flex-end !important;
+            justify-content: space-around !important;
+            height: 250px !important;
+            border-left: 2px solid #333 !important;
+            border-bottom: 2px solid #333 !important;
+            padding: 10px !important;
+        }
+        
+        .bar-group {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            flex: 1 !important;
+        }
+        
+        .bar {
+            width: 60px !important;
+            background: #EEEEEE !important;
+            border-radius: 4px 4px 0 0 !important;
+            position: relative !important;
+            transition: all 0.3s ease !important;
+            cursor: pointer !important;
+            margin-bottom: 10px !important;
+        }
+        
+        .bar.highlight {
+            background: #FF9933 !important;
+        }
+        
+        .bar:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 5px 15px rgba(255,153,51,0.3) !important;
+        }
+        
+        .bar-tooltip {
+            position: absolute !important;
+            top: -30px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            background: #333 !important;
+            color: white !important;
+            padding: 5px 10px !important;
+            border-radius: 4px !important;
+            font-size: 12px !important;
+            white-space: nowrap !important;
+            opacity: 0 !important;
+            transition: opacity 0.3s ease !important;
+            pointer-events: none !important;
+            z-index: 100 !important;
+        }
+        
+        .bar:hover .bar-tooltip {
+            opacity: 1 !important;
+        }
+        
+        .bar-label {
+            font-size: 12px !important;
+            color: #333333 !important;
+            text-align: center !important;
+            margin-top: 10px !important;
+        }
+        
+        .y-axis-labels {
+            position: absolute !important;
+            left: -40px !important;
+            top: 0 !important;
+            height: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            font-size: 12px !important;
+            color: #333333 !important;
+        }
+        
+        .chart-source {
+            font-size: 12px !important;
+            color: #666 !important;
+            text-align: center !important;
+            margin-top: 20px !important;
+            font-style: italic !important;
+        }
+        
+        /* ====== 社交证明区域 ====== */
+        .social-proof {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 20px !important;
+            flex-wrap: wrap !important;
+            margin: 20px 0 !important;
+            padding: 20px !important;
+            background: #FFF5EB !important;
+            border-radius: 8px !important;
+        }
+        
+        .social-proof span {
+            background: white !important;
+            padding: 8px 15px !important;
+            border-radius: 20px !important;
+            font-size: 14px !important;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* ====== 下单区域 ====== */
+        .order-section {
+            text-align: center !important;
+            padding: 40px 20px !important;
+            background: #FFF5EB !important;
+            border-radius: 8px !important;
+            margin: 20px 0 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        }
+        
+        .order-title {
+            font-size: 24px !important;
+            color: #FF9933 !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .order-price-info {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 20px !important;
+            flex-wrap: wrap !important;
+            margin: 20px 0 !important;
+        }
+        
+        .price-card {
+            background: white !important;
+            padding: 20px !important;
+            border-radius: 8px !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+            min-width: 120px !important;
+        }
+        
+        .price-value {
+            font-size: 24px !important;
+            color: #FF9933 !important;
+            font-weight: bold !important;
+        }
+        
+        .price-label {
+            font-size: 14px !important;
+            color: #666 !important;
+            margin-top: 5px !important;
+        }
+        
+        /* ====== 响应式设计 ====== */
+        @media (max-width: 768px) {
+            .product-title {
+                font-size: 20px !important;
+            }
+            
+            .content-title {
+                font-size: 16px !important;
+            }
+            
+            .content-body {
+                font-size: 13px !important;
+            }
+            
+            .action-button {
+                font-size: 14px !important;
+                padding: 6px 12px !important;
+            }
+            
+            .bar {
+                width: 40px !important;
+            }
+            
+            .bar-chart {
+                height: 200px !important;
+            }
+            
+            .social-proof {
+                gap: 10px !important;
+            }
+            
+            .social-proof span {
+                font-size: 12px !important;
+                padding: 6px 10px !important;
+            }
+        }
+        
+        /* ====== 加载动画 ====== */
+        .loading-spinner {
+            display: inline-block !important;
+            width: 20px !important;
+            height: 20px !important;
+            border: 3px solid #f3f3f3 !important;
+            border-top: 3px solid #FF9933 !important;
+            border-radius: 50% !important;
+            animation: spin 1s linear infinite !important;
+            margin-right: 10px !important;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ====== 弹窗样式 ====== */
+        .modal-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0,0,0,0.5) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 1000 !important;
+        }
+        
+        .modal-content {
+            background: white !important;
+            padding: 40px !important;
+            border-radius: 15px !important;
+            text-align: center !important;
+            max-width: 400px !important;
+            width: 90% !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+        }
+        
+        .modal-title {
+            color: #FF9933 !important;
+            margin-bottom: 20px !important;
+            font-size: 20px !important;
+        }
+        
+        /* ====== 兼容性修复 ====== */
+        /* 确保在所有浏览器中显示一致 */
+        .dormitory-hot-rice-container {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* 修复iOS Safari点击延迟 */
+        .action-button {
+            touch-action: manipulation;
+        }
+        
+        /* 确保微信内置浏览器兼容性 */
+        .dormitory-hot-rice-container {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 主体内容 ========== -->
+    <div class="dormitory-hot-rice-container">
+        <!-- 热榜引流标识 -->
+        <div class="hot-badge fade-in-up" style="animation-delay: 0.1s;">
+            🔥 抖音热榜TOP1 | 宿舍美食爆款 | 月销10万+
+        </div>
+        
+        <!-- 产品主标题 -->
+        <h1 class="product-title fade-in-up" style="animation-delay: 0.2s;">
+            🍚 XX品牌川味回锅肉自热米饭 - 宿舍党实测推荐
+        </h1>
+        
+        <!-- 社交证明 -->
+        <div class="social-proof fade-in-up" style="animation-delay: 0.3s;">
+            <span>⭐ 4.9分好评</span>
+            <span>📈 月销10万+</span>
+            <span>👥 99%宿舍党推荐</span>
+            <span>🏆 2024年宿舍美食冠军</span>
+        </div>
+        
+        <!-- ========== 美食内容区块1：宿舍煮制过程 ========== -->
+        <div class="food-content-block fade-in-up" style="animation-delay: 0.4s;">
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&h=400&fit=crop" 
+                     alt="自热米饭加热过程" 
+                     class="product-image image-fade-in"
+                     loading="lazy"
+                     onerror="this.src='https://picsum.photos/800/400?random=1'">
+                <div class="image-placeholder" style="display: none;">🍳 美食加载中...</div>
+            </div>
+            <div class="text-content">
+                <h2 class="content-title">🍚 宿舍煮制全过程，15分钟搞定一顿正餐</h2>
+                <div class="content-body">
+                    兄弟们！作为一个经常熬夜写论文的宿舍党，我给你们挖到宝了！😎
+                    这个XX品牌川味回锅肉自热米饭简直是我的救星！<strong>15分钟就能吃到热腾腾的正宗川味</strong>，
+                    比泡面健康，比外卖便宜！再也不用等外卖小哥半小时了！🛵
+                    
+                    最牛的是，上课前在宿舍准备一下，课间休息就能开吃，早八人再也不用饿肚子了！🏃‍♂️
+                    而且包装超便携，图书馆、自习室都能带，简直是移动的米其林餐厅！📚
+                </div>
+                <div style="text-align: center;">
+                    <a href="#order" class="action-button">🛒 立即抢购</a>
+                    <a href="#chart" class="action-button">📊 查看实测数据</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== 美食内容区块2：米饭开盖特写 ========== -->
+        <div class="food-content-block fade-in-up" style="animation-delay: 0.5s;">
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&h=400&fit=crop" 
+                     alt="美味米饭特写" 
+                     class="product-image image-fade-in"
+                     loading="lazy"
+                     onerror="this.src='https://picsum.photos/800/400?random=2'">
+                <div class="image-placeholder" style="display: none;">🍚 美食加载中...</div>
+            </div>
+            <div class="text-content">
+                <h2 class="content-title">🍚 米饭Q弹不夹生，每一粒都是精品</h2>
+                <div class="content-body">
+                    我的天！这个自热米饭的口感绝了！🍚
+                    一开始我以为自热米饭都那样，结果这个直接颠覆我的认知！
+                    <strong>米饭Q弹有嚼劲，完全不是那种软趴趴的感觉！每一粒米都很有韧性！</strong>
+                    
+                    最让我震惊的是那个回锅肉！🥩 <strong>肉量占比20%不是吹的，每一口都能吃到肉</strong>，
+                    而且肥瘦相间，香而不腻！那个川味调料调得太正宗了，辣度刚刚好，够味但不会辣到胃疼！
+                    
+                    我室友都被香味吸引过来了，现在我们宿舍已经囤了一箱！📦 比外面餐厅卖的还要好吃！
+                </div>
+                <div style="text-align: center;">
+                    <a href="#order" class="action-button">🛒 立即抢购</a>
+                    <a href="#chart" class="action-button">📊 查看实测数据</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== 美食内容区块3：肉量实拍 ========== -->
+        <div class="food-content-block fade-in-up" style="animation-delay: 0.6s;">
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&h=400&fit=crop" 
+                     alt="丰富肉量展示" 
+                     class="product-image image-fade-in"
+                     loading="lazy"
+                     onerror="this.src='https://picsum.photos/800/400?random=3'">
+                <div class="image-placeholder" style="display: none;">🥩 美食加载中...</div>
+            </div>
+            <div class="text-content">
+                <h2 class="content-title">🍚 肉量占比20%，性价比之王</h2>
+                <div class="content-body">
+                    精打细算的宿舍党集合！我给你们算笔账！💸
+                    外卖一份普通的盖饭至少要20块，而且分量还少。
+                    <strong>这个XX品牌川味回锅肉自热米饭才12.9！</strong>
+                    
+                    而且你们想想：
+                    ✅ <strong>20%的肉量，比外卖给的肉多多了</strong>
+                    ✅ 3种口味随便选，每天不重样
+                    ✅ 不用给外卖费，不用等配送
+                    ✅ 比泡面营养，比外卖便宜
+                    
+                    我算了下，一个月吃20次，比外卖能省下140多块！这笔钱都能再买10份了！📈
+                    而且现在还有活动，买三送一！性价比直接拉满！💪
+                </div>
+                <div style="text-align: center;">
+                    <a href="#order" class="action-button">🛒 立即抢购</a>
+                    <a href="#chart" class="action-button">📊 查看实测数据</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== 美食内容区块4：产品包装全景 ========== -->
+        <div class="food-content-block fade-in-up" style="animation-delay: 0.7s;">
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&h=400&fit=crop" 
+                     alt="精美产品包装" 
+                     class="product-image image-fade-in"
+                     loading="lazy"
+                     onerror="this.src='https://picsum.photos/800/400?random=4'">
+                <div class="image-placeholder" style="display: none;">📦 美食加载中...</div>
+            </div>
+            <div class="text-content">
+                <h2 class="content-title">🍚 三种口味可选，满足不同需求</h2>
+                <div class="content-body">
+                    XX品牌自热米饭共有三种精选口味：
+                    🌶️ <strong>川味回锅肉</strong> - 正宗川味，麻辣鲜香
+                    🍖 <strong>黑椒牛柳</strong> - 西式风味，嫩滑多汁
+                    🍄 <strong>香菇滑鸡</strong> - 清淡营养，老少皆宜
+                    
+                    每种口味都是经过宿舍党实测验证的爆款，<strong>肉量占比20%不是吹的</strong>！
+                    包装设计也很贴心，<strong>15分钟即食</strong>，随时随地都能享受到热腾腾的美味！
+                </div>
+                <div style="text-align: center;">
+                    <a href="#order" class="action-button">🛒 立即抢购</a>
+                    <a href="#chart" class="action-button">📊 查看实测数据</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== 数据可视化图表 ========== -->
+        <div class="chart-section fade-in-up" id="chart" style="animation-delay: 0.8s;">
+            <h2 class="chart-title">🍚 宿舍党实测：谁煮得更快？</h2>
+            <div class="chart-container">
+                <div class="y-axis-labels">
+                    <span>30分钟</span>
+                    <span>25分钟</span>
+                    <span>20分钟</span>
+                    <span>15分钟</span>
+                    <span>10分钟</span>
+                    <span>5分钟</span>
+                    <span>0分钟</span>
+                </div>
+                <div class="bar-chart" id="barChart">
+                    <!-- 柱状图将动态生成 -->
+                </div>
+            </div>
+            <div class="chart-source">
+                数据来源：5位宿舍党同步实测，室温25℃环境下记录，取平均值
+            </div>
+        </div>
+        
+        <!-- ========== 立即下单区域 ========== -->
+        <div id="order" class="order-section fade-in-up" style="animation-delay: 0.9s;">
+            <h2 class="order-title">🎉 还在等什么？宿舍党必备神器！</h2>
+            <p style="font-size: 18px; margin-bottom: 30px;">
+                立即抢购，享受宿舍美食生活新体验
+            </p>
+            <div class="order-price-info">
+                <div class="price-card">
+                    <div class="price-value">¥12.9</div>
+                    <div class="price-label">单份价格</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-value">买三送一</div>
+                    <div class="price-label">限时优惠</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-value">满99包邮</div>
+                    <div class="price-label">送货上门</div>
+                </div>
+            </div>
+            <button class="action-button" style="font-size: 18px; padding: 15px 40px; margin-top: 30px;" onclick="showOrderModal()">
+                🛒 立即下单
+            </button>
+        </div>
+    </div>
+    
+    <!-- ========== 交互脚本 ========== -->
+    <script>
+        // ====== 品牌对比数据 ======
+        const brandData = [
+            { name: 'XX品牌', time: 15, highlight: true },
+            { name: 'A品牌', time: 25, highlight: false },
+            { name: 'B品牌', time: 20, highlight: false },
+            { name: 'C品牌', time: 18, highlight: false }
+        ];
+        
+        // ====== 初始化柱状图 ======
+        function initChart() {
+            const chartContainer = document.getElementById('barChart');
+            if (!chartContainer) return;
+            
+            const maxTime = 30; // 固定最大值为30分钟
+            
+            brandData.forEach((brand, index) => {
+                const barGroup = document.createElement('div');
+                barGroup.className = 'bar-group';
+                
+                const bar = document.createElement('div');
+                bar.className = brand.highlight ? 'bar highlight' : 'bar';
+                bar.style.height = `${(brand.time / maxTime) * 100}%`;
+                
+                const tooltip = document.createElement('div');
+                tooltip.className = 'bar-tooltip';
+                tooltip.textContent = `${brand.time}分钟`;
+                bar.appendChild(tooltip);
+                
+                const label = document.createElement('div');
+                label.className = 'bar-label';
+                label.textContent = brand.name;
+                
+                barGroup.appendChild(bar);
+                barGroup.appendChild(label);
+                chartContainer.appendChild(barGroup);
+            });
+        }
+        
+        // ====== 显示下单弹窗 ======
+        function showOrderModal() {
+            // 创建弹窗遮罩
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'modal-overlay';
+            modalOverlay.id = 'orderModal';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            
+            modalContent.innerHTML = `
+                <h3 class="modal-title">🎉 确认下单</h3>
+                <p style="margin-bottom: 20px; line-height: 1.6;">
+                    <strong>XX品牌川味回锅肉自热米饭</strong><br>
+                    💰 单价：¥12.9/份<br>
+                    🎁 买三送一活动进行中<br>
+                    🚚 满99元包邮<br>
+                    📦 预计2-3天送达
+                </p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="action-button" onclick="confirmOrder()">确认下单</button>
+                    <button class="action-button" style="background: #ccc;" onclick="closeModal()">再想想</button>
+                </div>
+            `;
+            
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+            
+            // 点击背景关闭弹窗
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+            
+            // 防止弹窗内容点击事件冒泡
+            modalContent.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        // ====== 确认下单 ======
+        function confirmOrder() {
+            alert('🎉 订单提交成功！我们将尽快为您安排发货！');
+            closeModal();
+        }
+        
+        // ====== 关闭弹窗 ======
+        function closeModal() {
+            const modal = document.getElementById('orderModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+        
+        // ====== 平滑滚动 ======
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // ====== 图片懒加载与淡入效果 ======
+        function initImageLoading() {
+            const images = document.querySelectorAll('.product-image');
+            
+            // 创建观察器来检测图片是否进入视口
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            
+                            // 图片加载完成后添加淡入效果
+                            img.addEventListener('load', function() {
+                                setTimeout(() => {
+                                    img.classList.add('loaded');
+                                }, 100);
+                            });
+                            
+                            // 如果图片已经缓存，立即添加淡入效果
+                            if (img.complete) {
+                                setTimeout(() => {
+                                    img.classList.add('loaded');
+                                }, 100);
+                            }
+                            
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px'
+                });
+                
+                images.forEach(img => imageObserver.observe(img));
+            } else {
+                // 降级处理：不支持IntersectionObserver时直接加载
+                images.forEach(img => {
+                    img.addEventListener('load', function() {
+                        setTimeout(() => {
+                            img.classList.add('loaded');
+                        }, 100);
+                    });
+                    
+                    if (img.complete) {
+                        setTimeout(() => {
+                            img.classList.add('loaded');
+                        }, 100);
+                    }
+                });
+            }
+        }
+        
+        // ====== 兼容性检查与修复 ======
+        function initCompatibilityFixes() {
+            // 检查浏览器兼容性
+            const userAgent = navigator.userAgent.toLowerCase();
+            
+            // 微信浏览器特殊处理
+            if (userAgent.includes('micromessenger')) {
+                // 移除可能导致微信浏览器异常的样式
+                document.querySelectorAll('.dormitory-hot-rice-container *').forEach(el => {
+                    el.style.webkitTransform = el.style.transform;
+                    el.style.webkitTransition = el.style.transition;
+                });
+            }
+            
+            // iOS Safari特殊处理
+            if (userAgent.includes('safari') && !userAgent.includes('chrome')) {
+                // 修复iOS Safari的点击延迟
+                document.querySelectorAll('.action-button').forEach(btn => {
+                    btn.addEventListener('touchstart', function() {}, { passive: true });
+                });
+            }
+            
+            // Android浏览器特殊处理
+            if (userAgent.includes('android')) {
+                // 修复Android的滚动性能
+                document.querySelector('.dormitory-hot-rice-container').style.webkitOverflowScrolling = 'touch';
+            }
+        }
+        
+        // ====== 页面初始化 ======
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化各个功能模块
+            initChart();
+            initSmoothScroll();
+            initImageLoading();
+            initCompatibilityFixes();
+            
+            // 延迟初始化，确保页面完全加载
+            setTimeout(() => {
+                // 添加页面加载完成的视觉反馈
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+        
+        // ====== 错误处理 ======
+        window.addEventListener('error', function(e) {
+            console.warn('页面运行出现警告:', e.message);
+            // 不显示给用户，静默处理
+        });
+        
+        // ====== 性能优化 ======
+        // 防抖函数
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // 优化滚动性能
+        const optimizedScroll = debounce(function() {
+            // 滚动相关的处理逻辑
+        }, 100);
+        
+        window.addEventListener('scroll', optimizedScroll, { passive: true });
+    </script>
+</body>
+</html>
