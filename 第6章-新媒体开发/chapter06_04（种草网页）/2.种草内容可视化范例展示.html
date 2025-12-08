@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>种草内容可视化范例展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        
+        h1 {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #1a73e8, #6c14d0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .visualization-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #eaeaea;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title i {
+            color: #1a73e8;
+        }
+        
+        .section-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #1a73e8;
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .example-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .example-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .example-tag {
+            background: #1a73e8;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .example-content {
+            padding: 20px;
+        }
+        
+        .chart-container {
+            height: 250px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .chart {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 80%;
+            padding: 0 20px;
+        }
+        
+        .bar {
+            width: 60px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .bar-label {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .horizontal-bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .bar-row {
+            display: flex;
+            align-items: center;
+        }
+        
+        .bar-label-left {
+            width: 120px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .bar-fill-container {
+            flex: 1;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .pie-chart-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #4caf50 0% 88%,
+                #8bc34a 88% 97%,
+                #ffc107 97% 100%
+            );
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pie-center {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #333;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        
+        .word-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .word {
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: #e3f2fd;
+            color: #1a73e8;
+            font-weight: 600;
+        }
+        
+        .word-large {
+            font-size: 18px;
+            background: #bbdefb;
+        }
+        
+        .word-medium {
+            font-size: 16px;
+        }
+        
+        .word-small {
+            font-size: 14px;
+            background: #e8f5e9;
+            color: #4caf50;
+        }
+        
+        .example-explanation {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .explanation-title i {
+            color: #1a73e8;
+        }
+        
+        .explanation-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .principles-summary {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            margin-top: 40px;
+        }
+        
+        .principles-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .principle-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .principle-icon {
+            width: 60px;
+            height: 60px;
+            background: #1a73e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .principle-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .principle-desc {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>种草内容可视化范例展示</h1>
+            <p class="subtitle">聚焦"效果验证、价值对比、用户反馈"三个核心方向，提升种草内容说服力</p>
+        </header>
+        
+        <section class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-line"></i>
+                1. 效果验证类可视化
+            </h2>
+            <div class="section-description">
+                将产品使用效果从"主观描述"转化为"客观数据"，解决用户"效果是否真实"的核心疑虑。通过数据量化产品价值，增强内容可信度。
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3 class="example-title">低卡代餐粥热量对比</h3>
+                        <span class="example-tag">零食类</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="chart-container">
+                            <div class="chart">
+                                <div class="bar-chart">
+                                    <div class="bar" style="height: 100%; background-color: #4caf50;">
+                                        <div class="bar-value">89大卡</div>
+                                        <div class="bar-label">代餐粥</div>
+                                    </div>
+                                    <div class="bar" style="height: 45%; background-color: #ff9800;">
+                                        <div class="bar-value">95大卡</div>
+                                        <div class="bar-label">苹果</div>
+                                    </div>
+                                    <div class="bar" style="height: 80%; background-color: #f44336;">
+                                        <div class="bar-value">150大卡</div>
+                                        <div class="bar-label">普通麦片</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center; margin-top: 10px; font-size: 14px; color: #666;">每份热量对比</div>
+                            </div>
+                        </div>
+                        <div class="example-explanation">
+                            <div class="explanation-title">
+                                <i class="fas fa-lightbulb"></i>
+                                设计思路
+                            </div>
+                            <p class="explanation-text">使用柱状图直观展示代餐粥与常见食物的热量对比，用"每份热量仅89大卡，约等于1个苹果"的客观数据，比"低卡健康"的主观描述更具说服力。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3 class="example-title">大米蒸煮份量对比</h3>
+                        <span class="example-tag">粮油类</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="chart-container">
+                            <div class="chart">
+                                <div class="bar-chart">
+                                    <div class="bar" style="height: 100%; background-color: #ff9800;">
+                                        <div class="bar-value">3.2碗</div>
+                                        <div class="bar-label">A品牌</div>
+                                    </div>
+                                    <div class="bar" style="height: 70%; background-color: #4caf50;">
+                                        <div class="bar-value">2.2碗</div>
+                                        <div class="bar-label">B品牌</div>
+                                    </div>
+                                    <div class="bar" style="height: 60%; background-color: #2196f3;">
+                                        <div class="bar-value">1.9碗</div>
+                                        <div class="bar-label">普通大米</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center; margin-top: 10px; font-size: 14px; color: #666;">同重量蒸煮份量对比</div>
+                            </div>
+                        </div>
+                        <div class="example-explanation">
+                            <div class="explanation-title">
+                                <i class="fas fa-lightbulb"></i>
+                                设计思路
+                            </div>
+                            <p class="explanation-text">通过柱状图展示同重量大米蒸煮后的份量差异，直观呈现产品的"出饭率"优势，让用户清晰了解产品的实际价值。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                2. 价值对比类可视化
+            </h2>
+            <div class="section-description">
+                通过与同类产品或用户原有使用习惯对比，突出目标产品的"性价比"或"独特性"，帮助用户做出决策。
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3 class="example-title">辣条价格对比</h3>
+                        <span class="example-tag">零食类</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="chart-container">
+                            <div class="horizontal-bar-chart">
+                                <div class="bar-row">
+                                    <div class="bar-label-left">本品</div>
+                                    <div class="bar-fill-container">
+                                        <div class="bar-fill" style="width: 66%; background-color: #4caf50;">9.9元/100g</div>
+                                    </div>
+                                </div>
+                                <div class="bar-row">
+                                    <div class="bar-label-left">某知名品牌</div>
+                                    <div class="bar-fill-container">
+                                        <div class="bar-fill" style="width: 100%; background-color: #f44336;">15元/80g</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example-explanation">
+                            <div class="explanation-title">
+                                <i class="fas fa-lightbulb"></i>
+                                设计思路
+                            </div>
+                            <p class="explanation-text">使用横向柱状图直观展示价格对比，同时标注单位价格，清晰呈现"本品价格9.9元/100g，某知名品牌15元/80g"的性价比优势。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3 class="example-title">有机蔬菜营养对比</h3>
+                        <span class="example-tag">食材类</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="chart-container">
+                            <div class="chart">
+                                <div class="bar-chart">
+                                    <div class="bar" style="height: 100%; background-color: #4caf50;">
+                                        <div class="bar-value">+35%</div>
+                                        <div class="bar-label">维生素C</div>
+                                    </div>
+                                    <div class="bar" style="height: 80%; background-color: #4caf50;">
+                                        <div class="bar-value">+28%</div>
+                                        <div class="bar-label">铁元素</div>
+                                    </div>
+                                    <div class="bar" style="height: 70%; background-color: #4caf50;">
+                                        <div class="bar-value">+22%</div>
+                                        <div class="bar-label">抗氧化剂</div>
+                                    </div>
+                                    <div class="bar" style="height: 60%; background-color: #9e9e9e;">
+                                        <div class="bar-value">0%</div>
+                                        <div class="bar-label">农药残留</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center; margin-top: 10px; font-size: 14px; color: #666;">有机 vs 普通蔬菜营养对比</div>
+                            </div>
+                        </div>
+                        <div class="example-explanation">
+                            <div class="explanation-title">
+                                <i class="fas fa-lightbulb"></i>
+                                设计思路
+                            </div>
+                            <p class="explanation-text">通过柱状图展示有机蔬菜与普通蔬菜在关键营养成分上的差异，同时突出"零农药残留"的独特优势，强化产品的健康价值。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                3. 用户反馈类可视化
+            </h2>
+            <div class="section-description">
+                将分散的用户评价转化为可视化数据，呈现"多数用户的真实反馈"，利用群体信任效应提升内容可信度。
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3 class="example-title">自热火锅用户评价</h3>
+                        <span class="example-tag">速食类</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="chart-container">
+                            <div class="pie-chart-container">
+                                <div class="pie-chart">
+                                    <div class="pie-center">88%<br>5星</div>
+                                </div>
+                                <div class="pie-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background-color: #4caf50;"></div>
+                                        <div>5星好评 88%</div>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background-color: #8bc34a;"></div>
+                                        <div>4星好评 9%</div>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background-color: #ffc107;"></div>
+                                        <div>一般 3%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example-explanation">
+                            <div class="explanation-title">
+                                <i class="fas fa-lightbulb"></i>
+                                设计思路
+                            </div>
+                            <p class="explanation-text">使用饼图直观展示用户评分分布，突出"88%用户给出5星好评"的数据，利用从众心理增强产品可信度。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3 class="example-title">用户评价关键词云</h3>
+                        <span class="example-tag">通用类</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="chart-container">
+                            <div class="word-cloud">
+                                <div class="word word-large">菜量足</div>
+                                <div class="word word-medium">汤底香</div>
+                                <div class="word word-large">方便快捷</div>
+                                <div class="word word-medium">味道正宗</div>
+                                <div class="word word-small">包装精美</div>
+                                <div class="word word-medium">性价比高</div>
+                                <div class="word word-small">加热快</div>
+                                <div class="word word-small">食材新鲜</div>
+                                <div class="word word-medium">回购多次</div>
+                                <div class="word word-small">辣度合适</div>
+                            </div>
+                        </div>
+                        <div class="example-explanation">
+                            <div class="explanation-title">
+                                <i class="fas fa-lightbulb"></i>
+                                设计思路
+                            </div>
+                            <p class="explanation-text">通过词云图突出用户评价中的高频关键词，如"菜量足、汤底香、方便快捷"等，让用户快速了解产品的核心优势。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="principles-summary">
+            <h2 class="principles-title">种草内容可视化核心原则</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="principle-title">聚焦核心数据</h3>
+                    <p class="principle-desc">无需覆盖多维度数据，选择最能证明产品价值的1-3个关键指标进行可视化展示。</p>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="principle-title">选择合适的图表</h3>
+                    <p class="principle-desc">根据数据类型和展示目的选择合适的图表类型，如对比数据用柱状图，占比数据用饼图。</p>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="principle-title">简洁直观的设计</h3>
+                    <p class="principle-desc">避免过度装饰，确保图表简洁易懂，让用户能够快速获取关键信息。</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>种草内容可视化范例 &copy; 2025 - 数据驱动决策，可视化赋能营销</p>
+        </footer>
+    </div>
+</body>
+</html>
