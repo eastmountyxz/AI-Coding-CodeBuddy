@@ -1,0 +1,31 @@
+{% extends 'library/base.html' %}
+
+{% block title %}首页 - 图书管理系统{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>欢迎来到图书管理系统，{{ username }}！</h2>
+</div>
+
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ book.cover_image }}" class="card-img-top book-cover" alt="{{ book.title }} 封面" onerror="this.src='https://picsum.photos/seed/book{{ book.id }}/400/300.jpg'">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <p class="card-text">
+                    <strong>作者:</strong> {{ book.author }}<br>
+                    <strong>分类:</strong> {{ book.category }}
+                </p>
+                <p class="card-text">{{ book.description|truncatewords:30 }}</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline-primary btn-sm">查看详情</button>
+                <button class="btn btn-outline-secondary btn-sm">加入书架</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
